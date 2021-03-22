@@ -11,11 +11,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
-                // dir('./ui') {
-                //     echo '***IN UI FOLDER***'
-                //     sh 'npm install'
-                // } 
+                dir('./ui') {
+                    echo '***IN UI FOLDER***'
+                    sh 'npm install'
+                } 
             }
         }
         stage('Test') {
