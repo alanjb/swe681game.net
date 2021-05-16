@@ -1,9 +1,8 @@
-require('dotenv').config();
-
 import * as http from 'http';
 import * as debug from 'debug';
-
 import App from './app';
+
+require('dotenv').config();
 
 debug('ts-express:server');
 
@@ -68,6 +67,5 @@ function ensureCorrectPortNumber() {
 function onListening(): void {
     let address = server.address();
     let bind = (typeof address === 'string') ? `pipe ${address}` : `port ${address.port}`;
-    // console.log(process.env);
-    debug(`Listening on ${bind}`);
+    console.log(`Listening on ${bind}`);
 }
