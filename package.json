@@ -1,0 +1,24 @@
+{
+  "name": "bl-sol",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanjb/bl-sol.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alanjb/bl-sol/issues"
+  },
+  "homepage": "https://github.com/alanjb/bl-sol#readme",
+  "devDependencies": {
+    "@types/chai-http": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "debug": "^3.2.7"
+  }
+}

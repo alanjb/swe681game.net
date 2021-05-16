@@ -1,0 +1,42 @@
+version: "1.0"
+
+services:
+  api:
+    container_name: api
+    build: ./../Server
+    command: npm run serve
+    volumes:
+     - ./../Server:/app
+     - api_node_modules:/app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - just-go
+
+  web:
+    container_name: web
+    build: ./../FrontEnd
+    command: npm run start -- --host 0.0.0.0
+    volumes:
+      - ./../FrontEnd:/app
+      - web_node_modules:/app/node_modules
+    ports:
+      - "4200:4200"
+    networks:
+      - just-go
+      
+  db:
+    image: mongo:latest
+    container_name: db
+    ports:
+      - "27017:27017"
+    networks:
+      - blsol
+
+volumes:
+  db-data:
+  api_node_modules:
+  web_node_modules:
+
+networks:
+  blsol:
