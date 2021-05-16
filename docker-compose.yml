@@ -1,42 +1,30 @@
-version: "1.0"
-
+version: "3"
 services:
   api:
-    container_name: api
-    build: ./../Server
-    command: npm run serve
+    service_name: api
+    build:
+      context: ./api
+      dockerfile: ./api/Dockerfile
+    container_name: "blsol-api"
     volumes:
-     - ./../Server:/app
-     - api_node_modules:/app/node_modules
+      - ./:/user/src/app
     ports:
-      - "3000:3000"
-    networks:
-      - just-go
-
-  web:
-    container_name: web
-    build: ./../FrontEnd
-    command: npm run start -- --host 0.0.0.0
-    volumes:
-      - ./../FrontEnd:/app
-      - web_node_modules:/app/node_modules
-    ports:
-      - "4200:4200"
-    networks:
-      - just-go
-      
-  db:
-    image: mongo:latest
-    container_name: db
+      - "8080:8080"
+    depends_on:
+      - mongodb-server
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  mongodb-server:
+    service_name: mongodb
+    image: "mongo:4.2.3-bionic"
     ports:
       - "27017:27017"
-    networks:
-      - blsol
-
-volumes:
-  db-data:
-  api_node_modules:
-  web_node_modules:
-
+    container_name: mongo-db
+    volumes:
+      - ./db/:/data/db
 networks:
-  blsol:
+  default:
+    external:
+      name: "bl-sol-network"

@@ -1,12 +1,12 @@
 import * as http from 'http';
 import * as debug from 'debug';
-import App from './app';
+import App from './App';
 
 require('dotenv').config();
 
 debug('ts-express:server');
 
-//whitelist port 8000 to be used as the only port for this web service
+//whitelist port 8080 to be used as the only port for this web service
 const port = normalizePort(process.env.PORT);
 
 //TODO: need to handle unexpected behavior here. 
@@ -17,9 +17,7 @@ try {
     console.log(error);
 }
 
-//create the server
 const server = http.createServer(App);
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -55,7 +53,7 @@ function onError(error: NodeJS.ErrnoException): void {
 function ensureCorrectPortNumber() {
     console.log('Ensuring that application is connecting to designated port...')
 
-    if (process.env.PORT !== '8000') {
+    if (process.env.PORT !== '8080') {
         console.log('Port access denied.');
         //TODO ??? shutoff app?
     }
