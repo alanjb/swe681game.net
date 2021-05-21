@@ -1,7 +1,7 @@
-version: "3"
+version: '3'
+
 services:
   api:
-    service_name: api
     build:
       context: ./api
       dockerfile: ./api/Dockerfile
@@ -10,20 +10,15 @@ services:
       - ./:/user/src/app
     ports:
       - "8080:8080"
-    depends_on:
-      - mongodb-server
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-  mongodb-server:
-    service_name: mongodb
-    image: "mongo:4.2.3-bionic"
+    links:
+      - mongodb
+  mongodb:
+    container_name: mongodb
+    image: "mongo:latest"
     ports:
       - "27017:27017"
-    container_name: mongo-db
     volumes:
-      - ./db/:/data/db
+      - data: /data/db    
 networks:
   default:
     external:
