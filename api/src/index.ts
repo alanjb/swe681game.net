@@ -1,23 +1,165 @@
 import * as http from 'http';
 import * as debug from 'debug';
 import App from './App';
+import AccessMonitor from './control-layer/service/AccessMonitor';
+import * as mongoose from 'mongoose';
 
-require('dotenv').config();
+/**
+ * Container Control Layer - certain security measures must be completed before moving to the next layer: Application Security layer
+ * 
+ * In order to get from one container to the next in the docker-defined container network, 
+ * multi-factored authentication is required to be . This is much more secure since the probably of a malicious hacker
+ * container in their possession each key to unlock each secured container. For sufficient security, a user of the system
+ * when creating their profile must add about 3-6 
+ * 
+ * 
+ * Each container runs a nodejs environment which will run in a single core of a CPU. Therefore, we ca have multiple 
+ * containers, each powered by a single core in a CPU. 
+*/
 
-debug('ts-express:server');
+//an IIFE: Immediately Invoked Function Expression
+(function () {
+    init();
+
+    function init() {
+        //go through pipeline
+        startAccessMonitor().then(isCreated => {
+            if (!isCreated) {
+                //end the program
+                throw new Error('Error: Failed to start Access Monitor. Goodbye.'); 
+
+            }
+        });
+    }
+
+    //why void here?
+    function startAccessMonitor(): Promise<boolean | void> {
+        return getAccessMonitor().then(AccessMonitor => {
+            //is null or undefined here?
+            if (AccessMonitor == null) {
+                Promise.resolve(false);
+                throw new Error('Error: Failed to start Access Monitor. Goodbye.'); 
+            }
+            Promise.resolve(true);
+        });
+    }
+
+    function getAccessMonitor(): Promise<AccessMonitor> {
+        //will return new Object and return it
+        return AccessMonitor.create().then(response => {
+            
+        });
+      }
+    
+    //Promise to create access monitor
+    // const accessMonitor = AccessMonitor.create();
+
+    //call 
+
+    //ensure current system operator is the root - we don't want sub-users to be able to start the application in anyway. 
+    //For example, given a malicious user who gains entry into the machine's operating system and has the ability to run the application 
+    //with an e.However, the data they are looking
+    //for is only accessible . This is accomplished by calling the script with the IIFE to check if the caller is root. 
+
+    //call bash script - will use the child_process module
+    
+    //use promise.all here or, use pipeline of promise calls where each call is only executed if the call before has been executed
+    ensureCallerIsRoot(); //create object.ensureCallerisRoot
+
+    //start: temporary whitelist given port (should be randomized possibly, for now use static integer)
+    
+
+    // require('dotenv').config(); in other application, don't need access to global variables so don't call it. 
+
+    initPort(); // don't init ports right away
+
+    //monitor - https://www.2daygeek.com/bash-shell-script-view-linux-system-information/
+})();
+
+
+/*
+*   need to check a few things before this is called. First, ensure root is calling this script
+*/
+
+//https://philipwalton.com/articles/implementing-private-and-protected-members-in-javascript/
+private function initPort() {
+    // const globalPortDef = normalizePort(process.env.PORT);
+    // const localPortDef = '8081';
+    
+
+
+    
+}
+
+/** 
+ * Contract
+ * 
+ * EXPECTS: 
+ * 
+ * **/
+function ensureCallerIsRoot() {
+    //call os and check if caller of script is root user. 
+    const { exec } = require("child_process");
+    let isRoot: boolean;
+
+    exec('./control-layer/scripts/control.sh', (error, stdout, stderr) => {
+        if (error) {
+            isRoot = false;
+            throw new Error('Error: Failed to connect.'); 
+        }
+
+        if (!stderr) {
+            isRoot = false;
+            throw new Error('Not root. Goodbye.'); 
+        }
+
+        if (stdout) {
+            isRoot = true;
+        }
+
+    });
+    
+    return isRoot;
+    
+}
+// debug('ts-express:server');
 
 //whitelist port 8080 to be used as the only port for this web service
-const port = normalizePort(process.env.PORT);
 
 //TODO: need to handle unexpected behavior here. 
+//TODO: need to connect to DB once this passes
 try {
-    //make async call 
-    ensureCorrectPortNumber();
+
+    return Promise
+        .all([
+            device.put()
+    //   projectApi.get(fetchedPage.projectId),
+    //   pageLockApi.exists(id),
+    //   selfBookmarkApi.existsForPage(id),
+    //   pageApi.getPageFeedback(id)
+    ])
+    //make async calls
+    return ensureCorrectPortNumber()
+        .then(isCorrectPort, () => {
+        
+        })
+        .catch(error){
+            console.log
+        }
+    //docker handles mapping
+    // mongoose.connect('mongodb://mongodb:27017/device_db', { useNewUrlParser: true })
 } catch (error) {
     console.log(error);
 }
 
 const server = http.createServer(App);
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'DB connection error!'))
+db.once('open', () => {
+    console.log('DB connected!')
+});
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -67,3 +209,5 @@ function onListening(): void {
     let bind = (typeof address === 'string') ? `pipe ${address}` : `port ${address.port}`;
     console.log(`Listening on ${bind}`);
 }
+
+
