@@ -1,7 +1,7 @@
-export interface AccessMonitor {
-  
-  roles: string[];
-  completedProfile: boolean;
-  acceptedTerms: boolean;
-  revalidationRequired: boolean;
+import AccessMonitor from "../services/AccessMonitor";
+
+export interface accessMonitor {
+  isRoot: boolean;
+  ensureCallerIsRoot: () => Promise<boolean>;
+  create: () => Promise<AccessMonitor>
 }

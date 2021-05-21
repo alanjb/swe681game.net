@@ -29,7 +29,7 @@ export default class AccessMonitor {
    * Promise-based static factory method to create an AccessMonitor object 
    * **/
   static create(): Promise<AccessMonitor> {
-    const accessMonitorObject = new AccessMonitor();
+    const accessMonitorObject: AccessMonitor = new AccessMonitor();
 
     console.log(accessMonitorObject);
 
@@ -40,7 +40,6 @@ export default class AccessMonitor {
     return Promise.resolve(accessMonitorObject);
   }
 
-
   /** 
    * Contract
    * - Effects: @throws Error if failed to connect to host operating system. 
@@ -49,31 +48,27 @@ export default class AccessMonitor {
    *            @return true if script 
    * 
    * **/
-  private ensureCallerIsRoot() {
+  public ensureCallerIsRoot(): Promise<boolean>  {
     //call os and check if caller of script is root user. 
     const { exec } = require("child_process");
     let isRoot: boolean;
 
     exec('./control-layer/scripts/control.sh', (error, stdout, stderr) => {
         if (error) {
-            isRoot = false;
-            throw new Error('Error: Failed to connect to host operating system. Goodbye.'); 
+            isRoot = false; 
         }
 
         if (!stderr) {
             isRoot = false;
-            throw new Error('Not root. Goodbye.'); 
         }
 
         if (stdout) {
-            console.log('Root...Welcome.')
+            console.log('root...welcome.')
             isRoot = true;
         }
 
     });
     
-    return isRoot;
-}
-
- 
+    return Promise.resolve(isRoot);
+  }
 }

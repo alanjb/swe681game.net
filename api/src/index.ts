@@ -1,7 +1,8 @@
 import * as http from 'http';
 import * as debug from 'debug';
 import App from './App';
-import AccessMonitor from './control-layer/service/AccessMonitor';
+import AccessMonitor from './control-layer/services/AccessMonitor';
+import { accessMonitor } from './control-layer/models/acessMonitor';
 import * as mongoose from 'mongoose';
 
 /**
@@ -17,39 +18,69 @@ import * as mongoose from 'mongoose';
  * containers, each powered by a single core in a CPU. 
 */
 
-//an IIFE: Immediately Invoked Function Expression
-(function () {
+//an IIFE: Immediately Invoked Function Expression - create a functional wrapper
+(function(global) {
+    const accessMonitor: accessMonitor;
+    const portMonitor: portMonitor;
+
     init();
 
     function init() {
         //go through pipeline
         startAccessMonitor().then(isCreated => {
             if (!isCreated) {
-                //end the program
-                throw new Error('Error: Failed to start Access Monitor. Goodbye.'); 
-
+                //turn off the program
+                throw new Error('Error: Failed to start Access Monitor. Goodbye.');
             }
+            
+            //isRoot and correct IP?
+            //promise all with isRoot and correct IP/Mac address of machine
+            accessMonitor.ensureCallerIsRoot().then(isRoot => {
+                if (!isRoot) {
+                    throw new Error('Error: not root. Goodbye.')
+                }
+
+                //go to next layer? 
+                //from control container layer to application security layer
+                //start the 8080 port to be opened
+                //monitor 
+
+                accessMonitor.ensureCorrectPort().then  
+
+            }).catch(error => {
+                throw new Error('Error: cannot execute task.' + error + '...Goodbye.');
+            })
         });
     }
 
-    //why void here?
-    function startAccessMonitor(): Promise<boolean | void> {
+    function startAccessMonitor(): Promise<boolean> {
         return getAccessMonitor().then(AccessMonitor => {
+            console.log("State of Access Monitor: " + AccessMonitor);
             //is null or undefined here?
             if (AccessMonitor == null) {
-                Promise.resolve(false);
-                throw new Error('Error: Failed to start Access Monitor. Goodbye.'); 
+                return Promise.resolve(false);
             }
-            Promise.resolve(true);
+            return Promise.resolve(true);
+        }).catch(error => {
+            throw new Error('Error: cannot execute task.' + error + '...Goodbye.');
         });
     }
 
     function getAccessMonitor(): Promise<AccessMonitor> {
         //will return new Object and return it
-        return AccessMonitor.create().then(response => {
-            
+        return AccessMonitor.create().then(accessMonitor => {
+            if (AccessMonitor == null) {
+                return Promise.resolve(null);
+            }
+
+            this.accessMonitor = accessMonitor;
+            return Promise.resolve(AccessMonitor);
+        }).catch(error => {
+            throw new Error('Error: cannot execute task. Goodbye.')
         });
-      }
+    }
+
+
     
     //Promise to create access monitor
     // const accessMonitor = AccessMonitor.create();
@@ -64,7 +95,6 @@ import * as mongoose from 'mongoose';
     //call bash script - will use the child_process module
     
     //use promise.all here or, use pipeline of promise calls where each call is only executed if the call before has been executed
-    ensureCallerIsRoot(); //create object.ensureCallerisRoot
 
     //start: temporary whitelist given port (should be randomized possibly, for now use static integer)
     
@@ -74,7 +104,7 @@ import * as mongoose from 'mongoose';
     initPort(); // don't init ports right away
 
     //monitor - https://www.2daygeek.com/bash-shell-script-view-linux-system-information/
-})();
+})(this);
 
 
 /*
@@ -193,7 +223,7 @@ function onError(error: NodeJS.ErrnoException): void {
 //EXPECTS: @throws IncorrectPortException if incorrect port is designated at runtime
 //         else set the port at runtime as the designated application port 
 function ensureCorrectPortNumber() {
-    console.log('Ensuring that application is connecting to designated port...')
+    console.log('Ensuring that application is connecting to designated port...');
 
     if (process.env.PORT !== '8080') {
         console.log('Port access denied.');
