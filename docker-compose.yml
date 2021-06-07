@@ -1,25 +1,12 @@
 version: '3'
 
 services:
-  api:
+  api-container:
+    container_name: api_container1
     build:
-      context: ./api
-      dockerfile: ./api/Dockerfile
-    container_name: "blsol-api"
-    volumes:
-      - ./:/user/src/app
+      context: './'
+      dockerfile: './api/Dockerfile'
     ports:
       - "8080:8080"
-    links:
-      - mongodb
-  mongodb:
-    container_name: mongodb
-    image: "mongo:latest"
-    ports:
-      - "27017:27017"
     volumes:
-      - data: /data/db    
-networks:
-  default:
-    external:
-      name: "bl-sol-network"
+      - ./api:/usr/src/api

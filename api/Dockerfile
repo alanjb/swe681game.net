@@ -1,7 +1,6 @@
-FROM node:12.18.1 
-WORKDIR /usr/src/app
-COPY package*.json ./
+FROM node:12
+WORKDIR /usr/src/api
+COPY /api/package*.json ./
 RUN npm install
-COPY . .
-EXPOSE 8080
-CMD ["npm","run", "dev"]
+COPY /api /usr/src/api
+CMD ["npm", "start"]
