@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
 
 const port = process.env.PORT;
-const app = new App().express;
+const app = App.createApp();
 
 app.set('port', port);
 

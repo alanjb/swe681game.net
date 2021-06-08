@@ -1,21 +1,25 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import deviceController from './control/DeviceController';
+import DeviceManagerController from './control/DeviceManagerController';
 
 // Creates and configures an ExpressJS web server.
 class App {
 
   // ref to Express instance
-  public express: express.Application;
-  private deviceController;
+  private express: express.Application;
+  private deviceManagerController: DeviceManagerController;
 
   //Run configuration methods on the Express instance.
   constructor() {
-    this.express = express()
-    this.middleware()
-    this.routes()
-    this.deviceController = deviceController;
+    this.express = express();
+    this.middleware();
+    this.routes();
+    this.deviceManagerController = new DeviceManagerController();
+  }
+
+  public static createApp() {
+    return new App().express;
   }
 
   // Configure Express middleware.
@@ -23,7 +27,7 @@ class App {
     this.express.use(logger('dev'))
     this.express.use(bodyParser.json())
     this.express.use(bodyParser.urlencoded({extended: false}))
-    this.express.use(function(req, res, next) {
+    this.express.use(function(req: any, res: any, next: any) {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
       res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -31,16 +35,21 @@ class App {
     })
   }
 
-  // Configure API endpoints.
+  //Configure API endpoints
   private routes(): void {
     const { express } = this;
 
-    express.use('/', () => {
-      
+    express.post('/device-manager', (req: any, res: any) => {
+      // console.log(req);
+      this.deviceManagerController.powerOff()
+        .then((response: any) => {
+          res.json(response);
+        })
+        .catch((error: any) => {
+          console.log(error)
+        })
     });
-    
   }
-
 }
 
 export default App;

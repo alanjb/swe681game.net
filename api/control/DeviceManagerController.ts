@@ -1,5 +1,6 @@
 class DeviceManagerController {
-    async createTask(task) {
+  public async powerOff() {
+    return await true;
         // logger.info('Controller: createTask', task);
         // return await taskService.createTask(task);
     }
