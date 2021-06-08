@@ -8,9 +8,9 @@
     "moduleResolution": "node"
   },
   "include": [
-    "api", "ui", "app"
+    "./api/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "/api/node_modules"
   ]
 }
