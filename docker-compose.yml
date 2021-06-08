@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  api-container:
-    container_name: api_container1
+  api:
+    container_name: api_container
     build:
       context: './'
       dockerfile: './api/Dockerfile'

@@ -5,10 +5,9 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "dist",
-    "moduleResolution": "node"
   },
   "include": [
-    "api", "ui", "app"
+    "api"
   ],
   "exclude": [
     "node_modules"
