@@ -7,7 +7,7 @@
     "outDir": "dist",
   },
   "include": [
-    "api"
+    "./"
   ],
   "exclude": [
     "node_modules"

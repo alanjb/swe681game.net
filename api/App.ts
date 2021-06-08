@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import DeviceManagerController from './control/DeviceManagerController';
+import DeviceManagerController from './device-manager/DeviceManagerController';
 
 // Creates and configures an ExpressJS web server.
 class App {
