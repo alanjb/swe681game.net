@@ -5,9 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
 
 const port = process.env.PORT;
-App.set('port', port);
+const app = new App().express;
 
-const server = http.createServer(App);
+app.set('port', port);
+
+const server = http.createServer(app);
 
 server.listen(port);
 
