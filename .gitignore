@@ -1,15 +1,16 @@
 .env
 
 # dependencies
-node_modules
-/node_modules
-/api/node_modules
+api/node_modules
+node_modules/
 
 # testing
 /coverage
 
 # production
 /dist
+
+/.DS_Store
 
 # misc
 .DS_Store

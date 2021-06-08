@@ -1,5 +1,11 @@
-describe("testing", () => {
-  it("should return 15 for add(10,5)", () => {
-    expect(10+5).toBe(15);
+import DeviceManagerController from './DeviceManagerController';
+
+describe("device-manager-api-testing", () => {
+  it("power off requested device", () => {
+    const deviceManagerController = new DeviceManagerController();
+    
+    deviceManagerController.powerOff().then((response) => {
+      expect(response).toBe(true)
+    })
   });
 });
