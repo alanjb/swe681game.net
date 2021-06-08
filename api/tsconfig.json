@@ -5,12 +5,11 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "dist",
-    "moduleResolution": "node"
   },
   "include": [
-    "./api/**/*.ts"
+    "api"
   ],
   "exclude": [
-    "/api/node_modules"
+    "node_modules"
   ]
 }
