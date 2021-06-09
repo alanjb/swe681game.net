@@ -10,8 +10,6 @@ node_modules/
 # production
 /dist
 
-/.DS_Store
-
 # misc
 .DS_Store
 .env.local
