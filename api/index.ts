@@ -6,16 +6,17 @@ import http from 'http';
 dotenv.config({ path: './config/.env' });
 
 //get whitelisted port from local env file
-const port = process.env.PORT;
+const PORT = process.env.PORT;
+const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE;
 
 //build App with given port
-const app = App.buildApp(port);
+const app = App.buildApp(PORT);
 
 //create http server to  - should be async 
 const server = http.createServer(app);
 
 //now listening for client requests 
-server.listen(port);
+server.listen(PORT);
 
 server.on('listening', () => {
     const addr = server.address();

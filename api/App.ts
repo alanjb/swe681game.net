@@ -1,6 +1,5 @@
 import express from 'express';
 import logger from 'morgan';
-import bodyParser from 'body-parser';
 import DeviceManagerController from './device-manager/DeviceManagerController';
 
 // Creates and configures an ExpressJS web server. Prevents sub-typing of this class.
@@ -24,8 +23,7 @@ class App {
     this.deviceManagerController = new DeviceManagerController();
     this.routes();
     
-    const startApp = this.start();
-    return startApp;
+    return this.start();
   }
 
   //check auth here in server cache 
@@ -36,9 +34,9 @@ class App {
   // Configure Express middleware.
   private static middleware(): void {
     if (this.app) {
-      this.app.use(logger('dev'))
-      this.app.use(bodyParser.json())
-      this.app.use(bodyParser.urlencoded({extended: false}))
+      this.app.use(logger('dev'));
+      this.app.use(express.urlencoded({ extended: true }))
+      this.app.use(express.json());
       this.app.use(function (req: any, res: any, next: any) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
