@@ -7,7 +7,8 @@ class DeviceManagerApi {
 
     let isPoweredOff: boolean
     //farmAddress + '/' + deviceId + '/powerOff'
-
+    //https://sol.bridgelabs.biz/123/powerOff
+    
     //get root node url (example: https://httpbin.org/post)
     await axios.post(farmAddress) 
       .then(() => {
