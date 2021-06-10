@@ -1,18 +1,25 @@
-import http from 'http';
 import App from './app';
 import dotenv from 'dotenv';
+import http from 'http';
 
+//set environment variables
 dotenv.config({ path: './config/.env' });
 
+//get whitelisted port from local env file
 const port = process.env.PORT;
-const app = App.createApp();
 
-app.set('port', port);
+//build App with given port
+const app = App.buildApp(port);
 
+//create http server to  - should be async 
 const server = http.createServer(app);
 
+//now listening for client requests 
 server.listen(port);
 
 server.on('listening', () => {
-    console.log('Listening on port ' + port);
+    const addr = server.address();
+    const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
+
+    console.log('Listening on Port: ' + bind)
 });

@@ -3,45 +3,57 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import DeviceManagerController from './device-manager/DeviceManagerController';
 
-// Creates and configures an ExpressJS web server.
+// Creates and configures an ExpressJS web server. Prevents sub-typing of this class.
 class App {
 
   // ref to Express instance
-  private express: express.Application;
-  private deviceManagerController: DeviceManagerController;
+  private static app: express.Application;
 
-  //Run configuration methods on the Express instance.
-  constructor() {
-    this.express = express();
+  // ref to device manager controller
+  private static deviceManagerController: DeviceManagerController;
+
+  //Run configuration methods on the Express instance by building 
+  public static buildApp(port: string) {
+    //some sort of check here for security
+    if (!port) {
+      console.log('Error: No Port.');
+    }
+
+    this.initExpress(); //this should be checked for correct init. async. Promise all
     this.middleware();
-    this.routes();
     this.deviceManagerController = new DeviceManagerController();
+    this.routes();
+    
+    const startApp = this.start();
+    return startApp;
   }
 
-  public static createApp() {
-    return new App().express;
+  //check auth here in server cache 
+  private static initExpress() {
+    this.app = express();
   }
 
   // Configure Express middleware.
-  private middleware(): void {
-    this.express.use(logger('dev'))
-    this.express.use(bodyParser.json())
-    this.express.use(bodyParser.urlencoded({extended: false}))
-    this.express.use(function(req: any, res: any, next: any) {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-      res.header('Access-Control-Allow-Headers', 'Content-Type');
-      next();
-    })
+  private static middleware(): void {
+    if (this.app) {
+      this.app.use(logger('dev'))
+      this.app.use(bodyParser.json())
+      this.app.use(bodyParser.urlencoded({extended: false}))
+      this.app.use(function (req: any, res: any, next: any) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        next();
+      });
+    }
   }
 
   //Configure API endpoints
-  private routes(): void {
-    const { express } = this;
+  private static routes(): void {
+    const { app, deviceManagerController } = this;
 
-    express.post('/device-manager', (req: any, res: any) => {
-      // console.log(req);
-      this.deviceManagerController.powerOff()
+    app.post('/device-manager', (req: any, res: any) => {
+      deviceManagerController.powerOff()
         .then((response: any) => {
           res.json(response);
         })
@@ -49,6 +61,13 @@ class App {
           console.log(error)
         })
     });
+  }
+  
+  private static start() {
+    const { app } = this;
+    if (app) {
+      return app;
+    }
   }
 }
 
