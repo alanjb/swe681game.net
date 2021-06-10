@@ -7,17 +7,18 @@ class DeviceManagerController {
     this.deviceManagerService = new DeviceManagerService();
   }
 
-  public async powerOff() {
-    let isEvent: boolean;
+  public async powerOff(deviceId: string, farmAddress: string) {
+    let isPoweredOff: boolean;
 
-    if (this.deviceManagerService) {
-      return await this.deviceManagerService.powerOff();
-    }
-   
-    
-        // logger.info('Controller: createTask', task);
-        // return await taskService.createTask(task);
-    }
+    //call DeviceManagerService
+    await this.deviceManagerService.powerOff(deviceId, farmAddress)
+      .then(() => {
+        isPoweredOff = true;
+      })
+      .catch(error => {
+        isPoweredOff = false;
+      })
+  }
 }
 
 export default DeviceManagerController;

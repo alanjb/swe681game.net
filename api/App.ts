@@ -53,12 +53,19 @@ class App {
     const { app, deviceManagerController } = this;
 
     app.post('/device-manager', (req: any, res: any) => {
-      deviceManagerController.powerOff()
-        .then((response: any) => {
-          res.json(response);
+      const deviceId: string = req.body.deviceId;
+      const farmAddress: string = req.body.farmAddress;
+
+      console.log('Device ID: ' + deviceId)
+      console.log('Farm Address: ' + farmAddress)
+
+      //req will have device data needed to make call like remote server location, device id
+      deviceManagerController.powerOff(deviceId, farmAddress)
+        .then(() => {
+          res.json(true);
         })
         .catch((error: any) => {
-          console.log(error)
+          res.json(false);
         })
     });
   }
