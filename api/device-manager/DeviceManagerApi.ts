@@ -3,24 +3,20 @@ import axios from 'axios';
 class DeviceManagerApi {
   
   public async powerOff(deviceId: string, farmAddress: string) {
-    console.log(`Calling remote farm server node at address ${farmAddress} to power off this device with id ${deviceId}`)
+    console.log(`Calling remote server node at address ${farmAddress} to power off device with id ${deviceId}`)
 
-    let isPoweredOff: boolean
-    //farmAddress + '/' + deviceId + '/powerOff'
-    //https://sol.bridgelabs.biz/123/powerOff
-    
-    //get root node url (example: https://httpbin.org/post)
-    await axios.post(farmAddress) 
-      .then(() => {
-        console.log('Successfully pinged root server...');
-        isPoweredOff = true;
-      })
-      .catch(error => {
-        console.log('Error! Could not ping root server...' + error);
-        isPoweredOff = false;
-      })
-    
-    return isPoweredOff;
+    // const endpoint = '/device-manager'; //from utils
+    // const farmServiceAddress = farmAddress + endpoint;
+
+    try {
+      const res = await axios.post(farmAddress, { deviceId: deviceId });
+      console.log('Success! The device has been reached...');
+      //the root node will send back res t/f here. For now in dev, just send back true
+      return true;
+    } catch (error) {
+      console.log('Error! Could not ping root server...' + error);
+      return false;
+    }
   }
 }
 

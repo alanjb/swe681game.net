@@ -8,18 +8,9 @@ class DeviceManagerService {
   }
 
   public async powerOff(deviceId: string, farmAddress: string) {
-    let isPoweredOff: boolean;
+    const { deviceManagerApi } = this;
     
-    //call device manager API to ping remote farm root node.
-    await this.deviceManagerApi.powerOff(deviceId, farmAddress)
-      .then(() => {
-        isPoweredOff = true;
-      })
-      .catch(() => {
-        isPoweredOff = false;
-      })
-    
-      return isPoweredOff;
+    return await deviceManagerApi.powerOff(deviceId, farmAddress);
   }
 }
 

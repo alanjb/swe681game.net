@@ -52,17 +52,18 @@ class App {
 
     app.post('/device-manager', (req: any, res: any) => {
       const deviceId: string = req.body.deviceId;
-      const farmAddress: string = req.body.farmAddress;
+      const farmAddress: string = req.body.farmAddress; //static ip or subdomain
 
       console.log('Device ID: ' + deviceId)
-      console.log('Farm Address: ' + farmAddress)
+      console.log('LAN Root Address: ' + farmAddress)
 
       //req will have device data needed to make call like remote server location, device id
-      deviceManagerController.powerOff(deviceId, farmAddress)
-        .then(() => {
-          res.json(true);
+      return deviceManagerController.powerOff(deviceId, farmAddress)
+        .then((response) => {
+          res.json(response);
         })
         .catch((error: any) => {
+          console.log('Failure at control layer: ' + error)
           res.json(false);
         })
     });

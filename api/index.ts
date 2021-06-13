@@ -7,7 +7,6 @@ dotenv.config({ path: './config/.env' });
 
 //get whitelisted port from local env file
 const PORT = process.env.PORT;
-const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE;
 
 //build App with given port
 const app = App.buildApp(PORT);
@@ -22,5 +21,5 @@ server.on('listening', () => {
     const addr = server.address();
     const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
 
-    console.log('Listening on Port: ' + bind)
+    console.log('Listening on ' + bind)
 });

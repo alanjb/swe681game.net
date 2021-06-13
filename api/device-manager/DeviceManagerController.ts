@@ -7,17 +7,10 @@ class DeviceManagerController {
     this.deviceManagerService = new DeviceManagerService();
   }
 
-  public async powerOff(deviceId: string, farmAddress: string) {
-    let isPoweredOff: boolean;
+  public powerOff(deviceId: string, farmAddress: string) {
+    const { deviceManagerService } = this;
 
-    //call DeviceManagerService
-    await this.deviceManagerService.powerOff(deviceId, farmAddress)
-      .then(() => {
-        isPoweredOff = true;
-      })
-      .catch(error => {
-        isPoweredOff = false;
-      })
+    return deviceManagerService.powerOff(deviceId, farmAddress);
   }
 }
 
