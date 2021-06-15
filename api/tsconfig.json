@@ -3,8 +3,9 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "target": "es6",
-    "module": "commonjs", //esnext
+    "module": "commonjs",
     "outDir": "dist",
+    "moduleResolution": "node"
   },
   "include": [
     "./"
