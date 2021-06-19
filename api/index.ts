@@ -10,7 +10,7 @@ dotenv.config({ path: './config/.env' });
 const PORT = process.env.PORT;
 
 //read private key - should be an env variable or dynamically set (ec2-user as ex.)
-const privateKey = fs.readFileSync('../../../../custom.key', 'utf8');
+const privateKey = fs.readFileSync('../../../custom.key', 'utf8');
 
 //read private key 
 const certificate = fs.readFileSync('/etc/pki/tls/certs/localhost.crt', 'utf8');
