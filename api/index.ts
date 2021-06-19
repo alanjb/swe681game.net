@@ -9,10 +9,8 @@ dotenv.config({ path: './config/.env' });
 //get whitelisted port from local env file
 const PORT = process.env.PORT;
 
-// const privateKey1 = fs.readFileSync('../../../custom.key', 'utf8');
-
 //read private key - should be an env variable or dynamically set (ec2-user as ex.)
-const privateKey = fs.readFileSync('/home/ec2-user/custom.key', 'utf8');
+const privateKey = fs.readFileSync('../../../../custom.key', 'utf8');
 
 //read private key 
 const certificate = fs.readFileSync('/etc/pki/tls/certs/localhost.crt', 'utf8');
