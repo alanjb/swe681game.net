@@ -1,24 +1,34 @@
 import App from './App';
 import dotenv from 'dotenv';
-import http from 'http';
+import https from 'https';
+import fs from 'fs';
 
-//set environment variables
+//access to environment variables
 dotenv.config({ path: './config/.env' });
 
 //get whitelisted port from local env file
 const PORT = process.env.PORT;
 
+//read private key - should be an env variable or dynamically set (ec2-user as ex.)
+const privateKey = fs.readFileSync('home/ec2-user/custom.key', 'utf8');
+
+//read private key 
+const certificate = fs.readFileSync('etc/pki/tls/certs/localhost.crt', 'utf8');
+
+//create credentials object, should build a type for this
+const credentials = { key: privateKey, cert: certificate };
+
 //build App with given port
 const app = App.buildApp(PORT);
 
-//create http server to  - should be async 
-const server = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
 
 //now listening for client requests 
-server.listen(PORT);
+httpsServer.listen(PORT);
 
-server.on('listening', () => {
-    const addr = server.address();
+//output port in usage
+httpsServer.on('listening', () => {
+    const addr = httpsServer.address();
     const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
 
     console.log('Listening on ' + bind)
