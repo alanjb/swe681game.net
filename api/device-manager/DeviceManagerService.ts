@@ -7,10 +7,10 @@ class DeviceManagerService {
     this.deviceManagerApi = new DeviceManagerApi();
   }
 
-  public async powerOff(deviceId: string, farmAddress: string) {
+  public powerOff(deviceId: string, farmAddress: string) {
     const { deviceManagerApi } = this;
     
-    return await deviceManagerApi.powerOff(deviceId, farmAddress);
+    return deviceManagerApi.powerOff(deviceId, farmAddress);
   }
 }
 

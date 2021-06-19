@@ -4,7 +4,7 @@ describe("device-manager-api-testing", () => {
   it("power off requested device", () => {
     const deviceManagerController = new DeviceManagerController();
     
-    deviceManagerController.powerOff().then((response) => {
+    deviceManagerController.powerOff('123', 'https://httpbin.org/post').then((response) => {
       expect(response).toBe(true)
     })
   });

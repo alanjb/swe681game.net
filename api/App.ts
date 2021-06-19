@@ -15,7 +15,7 @@ class App {
   public static buildApp(port: string) {
     //some sort of check here for security
     if (!port) {
-      console.log('Error: No Port.');
+      console.log('Error: No logical port specified.');
     }
 
     this.initExpress(); //this should be checked for correct init. async. Promise all

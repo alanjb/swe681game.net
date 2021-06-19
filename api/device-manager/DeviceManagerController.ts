@@ -10,6 +10,7 @@ class DeviceManagerController {
   public powerOff(deviceId: string, farmAddress: string) {
     const { deviceManagerService } = this;
 
+    //security controls here eventually
     return deviceManagerService.powerOff(deviceId, farmAddress);
   }
 }
