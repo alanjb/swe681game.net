@@ -11,7 +11,7 @@ const HTTP_PORT = process.env.HTTP_PORT;
 const HTTPS_PORT = process.env.HTTPS_PORT;
 
 //read private key - should be an env variable or dynamically set (ec2-user as ex.)
-const privateKey = fs.readFileSync('../../privkey.key', 'utf8');
+const privateKey = fs.readFileSync('/etc/pki/tls/private/privkey.key', 'utf8');
 
 //read private key 
 const certificate = fs.readFileSync('/etc/pki/tls/certs/custom.crt', 'utf8');
