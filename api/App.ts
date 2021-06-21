@@ -12,13 +12,8 @@ class App {
   private static deviceManagerController: DeviceManagerController;
 
   //Run configuration methods on the Express instance by building 
-  public static buildApp(port: string) {
-    //some sort of check here for security
-    if (!port) {
-      console.log('Error: No logical port specified.');
-    }
-
-    this.initExpress(); //this should be checked for correct init. async. Promise all
+  public static buildApp() {
+    this.initExpress();
     this.middleware();
     this.deviceManagerController = new DeviceManagerController();
     this.routes();
