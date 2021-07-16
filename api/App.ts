@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import DeviceManagerController from './device-manager/DeviceManagerController';
+import { auth } from 'express-openid-connect';
 
 // Creates and configures an ExpressJS web server. Prevents sub-typing of this class.
 class App {
@@ -29,6 +30,15 @@ class App {
   // Configure Express middleware.
   private static middleware(): void {
     if (this.app) {
+      this.app.use(
+        auth({
+          issuerBaseURL: 'https://YOUR_DOMAIN',
+          baseURL: 'https://YOUR_APPLICATION_ROOT_URL',
+          clientID: 'YOUR_CLIENT_ID',
+          secret: 'LONG_RANDOM_STRING',
+          idpLogout: true,
+        })
+      );
       this.app.use(logger('dev'));
       this.app.use(express.urlencoded({ extended: true }))
       this.app.use(express.json());
@@ -38,6 +48,7 @@ class App {
         res.header('Access-Control-Allow-Headers', 'Content-Type');
         next();
       });
+
     }
   }
 
