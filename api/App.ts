@@ -2,7 +2,6 @@ import express from 'express';
 import logger from 'morgan';
 import DeviceManagerController from './device-manager/DeviceManagerController';
 import { auth, requiresAuth } from 'express-openid-connect';
-import cors from 'cors';
 
 // Creates and configures an ExpressJS web server. Prevents sub-typing of this class.
 class App {
@@ -48,12 +47,10 @@ class App {
           idpLogout: true,
         })
       );
-      // this.app.use(cors);
       this.app.use(logger('dev'));
       this.app.use(express.urlencoded({ extended: true }))
       this.app.use(express.json());
       this.app.use(function (req: any, res: any, next: any) {
-        // res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
         next();
@@ -66,7 +63,7 @@ class App {
     const { app, deviceManagerController } = this;
 
     app.get('/', (req, res) => {
-      // res.send('hello')
+      console.log("test")
       res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged Out');
     })
 
@@ -77,7 +74,7 @@ class App {
     //need ID of device here
     app.post('/device-manager/:id', requiresAuth(), (req: any, res: any) => {
       const deviceId = req.query.id;
-      const farmAddress: string = req.body.farmAddress; //static ip or subdomain root.bridgelabs.biz
+      const farmAddress: string = req.body.farmAddress; 
 
       console.log('Device ID: ' + deviceId);
       console.log('LAN Root Address: ' + farmAddress);

@@ -24,23 +24,12 @@ if (ENVIRONMENT === 'DEV') {
     server = https.createServer(credentials, app);
 }
 
-app.get('/', (req, res) => {
-
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged Out');
-})
-
-app.listen(HTTP_PORT, () => {
-    console.log(`Example app listening at http://localhost:${HTTP_PORT}`
-        
-  )
-})
-
 //now listening for client requests 
-// server.listen(process.env.ENVIRONMENT === 'DEV' ? HTTP_PORT : HTTPS_PORT);
+server.listen(process.env.ENVIRONMENT === 'DEV' ? HTTP_PORT : HTTPS_PORT);
 
-// server.on('listening', () => {
-//     const addr = server.address();
-//     const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
+server.on('listening', () => {
+    const addr = server.address();
+    const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
 
-//     console.log('HTTP Listening on ' + bind)
-// });
+    console.log('HTTP Listening on ' + bind)
+});
