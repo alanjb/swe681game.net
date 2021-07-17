@@ -24,9 +24,9 @@ if (ENVIRONMENT === 'DEV') {
     server = https.createServer(credentials, app);
 }
 
-app.get('/login', (req, res) => {
-    res.send('hello')
-    // res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged Out');
+app.get('/', (req, res) => {
+
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged Out');
 })
 
 app.listen(HTTP_PORT, () => {
