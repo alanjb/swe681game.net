@@ -1,19 +1,20 @@
 
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
 import DeviceManagerContainer from '../../device-manager/DeviceManagerContainer';
-import AppContainer from '../AppContainer';
+import HomeContainer from "../components /HomeContainer";
+import ProfileContainer from '../components /ProfileContainer';
+import ProtectedRoute from '../security/protected-route'
+
+//should be passed in as a prop to AppContainer
 
 export default (
-  <AppContainer>
-    <Router>
-        <Switch>
-          <Route path="/device-manager" component={DeviceManagerContainer} />
-        </Switch>
-    </Router>
-  </AppContainer>
+  <Switch>
+    <Route path="/" exact component={HomeContainer} />
+    <ProtectedRoute path="/device-manager" component={DeviceManagerContainer} />
+    <ProtectedRoute path="/profile" component={ProfileContainer} />
+  </Switch>
 );
