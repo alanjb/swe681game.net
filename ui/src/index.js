@@ -1,10 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import router from './app/routing/router';
-import RootContainer from './RootContainer';
+import Auth0ProviderWithHistory from "./app/security/auth0Provider";
+import { BrowserRouter as Router } from "react-router-dom";
+import AppContainer from "./app/AppContainer";
+import dotenv from 'dotenv';
 
-ReactDOM.render(<RootContainer router={router} />, document.getElementById('root'));
+dotenv.config({ path: './app/config' });
+
+ReactDOM.render(
+    <Router>
+      <Auth0ProviderWithHistory>
+        <AppContainer/>
+      </Auth0ProviderWithHistory>
+    </Router>,
+    document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
