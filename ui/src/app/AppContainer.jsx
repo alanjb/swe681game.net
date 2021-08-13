@@ -1,14 +1,14 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import Loading from "././components /Loading";
-import NavbarContainer from "././components /NavbarContainer";
+import Loading from "./components/Loading";
+import NavbarContainer from "./components/NavbarContainer";
 import "../app.css";
 import {
   Switch,
   Route,
 } from "react-router-dom";
-import HomeContainer from "./components /HomeContainer";
-import ProfileContainer from './components /ProfileContainer';
+import HomeContainer from "./components/HomeContainer";
+import ProfileContainer from './components/ProfileContainer';
 import ProtectedRoute from './security/protected-route';
 import DeviceManagerContainer from '../device-manager/DeviceManagerContainer';
 
