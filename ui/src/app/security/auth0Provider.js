@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-
 require('dotenv').config({path: '../app/config/.env '})
 
 const Auth0ProviderWithHistory = ({ children }) => {
@@ -21,7 +20,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={window.location.origin}
+      redirectUri={window.location.origin + '/device-manager'}
       onRedirectCallback={onRedirectCallback}
     >
       {children}

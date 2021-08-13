@@ -4,6 +4,7 @@ import https from 'https';
 import http from 'http';
 import fs from 'fs';
 
+
 //access to environment variables
 dotenv.config({ path: './config/.env' });
 
@@ -46,7 +47,7 @@ if (app) {
             const addr = server.address();
             const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
     
-            console.log('Listening on ' + bind);
+            console.log('Listening on ' + bind + '...');
         });
 
     } else {

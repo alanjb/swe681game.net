@@ -1,8 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
+import cors from 'cors';
 import DeviceManagerController from './device-manager/DeviceManagerController';
-import { auth, requiresAuth } from 'express-openid-connect';
-import path from 'path';
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
@@ -10,11 +9,11 @@ class App {
   // ref to Express instance
   private static app: express.Application;
 
-  private static deviceManagerController: DeviceManagerController;
+  private static deviceManagerController = new DeviceManagerController();
 
   //Run configuration methods on the Express instance by building 
   public static buildApp() {
-    console.log('Building app...');
+    console.log("Starting build...");
 
     this.initExpress();
     this.initMiddleware();
@@ -25,77 +24,59 @@ class App {
 
   //check auth here in server cache 
   private static initExpress() {
-    console.log('Creating node...');
+    console.log("Creating node application...");
     this.app = express();
   }
 
   // Configure Express middleware.
   private static initMiddleware(): void {
-    console.log('Initializing application middleware...');
-
-    const ISSUER_BASE_URL = process.env.ISSUER_BASE_URL;
-    const CLIENT_ID = process.env.CLIENT_ID;
-    const PROD_BASE_URL = process.env.PROD_BASE_URL;
-    const DEV_BASE_URL = process.env.DEV_BASE_URL;
-    const SECRET = process.env.SECRET;
+    console.log("Initializing application middleware...");
 
     if (this.app) {
-      this.app.use(
-        auth({
-          authRequired: false,
-          auth0Logout: true,
-          issuerBaseURL: ISSUER_BASE_URL,
-          baseURL: process.env.ENVIRONMENT === 'DEV' ? DEV_BASE_URL : PROD_BASE_URL,
-          clientID: CLIENT_ID,
-          secret: SECRET,
-          idpLogout: true,
-        })
-      );
       this.app.use(logger('dev'));
+      this.app.use(cors())
       this.app.use(express.urlencoded({ extended: true }))
       this.app.use(express.json());
       this.app.use(function (req: any, res: any, next: any) {
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+        res.header("Access-Control-Allow-Headers", "Content-Type");
         next();
       });
     }
   }
 
   private static initRoutes() {
-    console.log('Initializing application routes...');
+    console.log("Initializing application routes...");
 
     const { app, deviceManagerController } = this;
 
-    app.get('/device-manager', requiresAuth(), (req, res) => {
-      res.send("User logged in: " + JSON.stringify(req.oidc.user));
-    });
-
-    app.post('/device-manager',  (req: any, res: any) => {
+    app.post("/device-manager/powerOff",  (req: any, res: any) => {
       const deviceId: string = req.body.deviceId;
-      const farmAddress: string = req.body.farmAddress; //static ip or subdomain
+      const farmAddress: string = req.body.farmAddress; 
 
-      console.log('Device ID: ' + deviceId)
-      console.log('LAN Root Address: ' + farmAddress)
+      console.log("Device ID: " + deviceId);
+      console.log("Root Node Address: " + farmAddress);
 
-      //req will have device data needed to make call like remote server location, device id
-      return deviceManagerController.powerOff(deviceId, farmAddress)
-        .then((response) => {
-          res.json(response);
+      return deviceManagerController
+        .powerOff(deviceId, farmAddress)
+        .then((response: any) => {
+          console.log('')
+          res.json({
+            isPoweredOff: response
+          });
         })
-        .catch((error: any) => {
-          console.log('Failure at control layer: ' + error)
-          res.json(false);
+        .catch((response: any) => {
+          console.log("Error: Failed to connect...")
+          res.status(400).json({
+            isPoweredOff: response
+          });
         })
     });
   }
 
   private static start() {
-    console.log('Starting application...');
-
-    const { app } = this;
-    if (app) {
-      return app;
+    if (this.app) {
+      return this.app;
     }
   }
 }
