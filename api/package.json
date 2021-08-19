@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon -L index.ts",
+    "start-prod": "pm2 start index.ts",
     "test": "jest"
   },
   "keywords": [],
