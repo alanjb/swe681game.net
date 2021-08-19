@@ -50,6 +50,10 @@ class App {
 
     const { app, deviceManagerController } = this;
 
+    app.get('/', (req, res) => {
+      res.send('device-manager api')
+    });
+
     app.post("/device-manager/powerOff",  (req: any, res: any) => {
       const deviceId: string = req.body.deviceId;
       const farmAddress: string = req.body.farmAddress; 
