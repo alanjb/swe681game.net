@@ -17,13 +17,14 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2.3.4
 
-      - name: ⎔ Setup node
+      - name: 🆙 Setup node
         uses: actions/setup-node@v2.4.0
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1.6.0
+        working-directory: ./ui
+        run: yarn install
         env:
           NODE_ENV: production
 
