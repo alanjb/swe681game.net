@@ -51,7 +51,7 @@ class App {
     const { app, deviceManagerController } = this;
 
     app.get('/', (req, res) => {
-      res.send('device-manager api')
+      res.send('get/device-manager')
     });
 
     app.post("/device-manager/powerOff",  (req: any, res: any) => {
