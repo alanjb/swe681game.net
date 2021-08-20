@@ -2,7 +2,6 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/Loading";
 import NavbarContainer from "./components/NavbarContainer";
-import "../app.css";
 import {
   Switch,
   Route,
@@ -20,9 +19,9 @@ const AppContainer = () => {
   }
 
   return (
-    <div id="app" className="d-flex flex-column h-100">
+    <div id="app" className="test">
       <NavbarContainer />
-      <div className="container flex-grow-1">
+      <div className="">
         <Switch>
           <Route path="/" exact component={HomeContainer} />
           <ProtectedRoute path="/device-manager" component={DeviceManagerContainer} />
