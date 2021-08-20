@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [15.x]    
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -29,9 +29,12 @@ jobs:
           NODE_ENV: production
 
       - name: 👷 Build
+        working-directory: ./ui
         run: yarn && yarn build
 
       - name: 🚀 Deploy
+        working-directory: ./ui
+        run: console.log('deploying...')
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
