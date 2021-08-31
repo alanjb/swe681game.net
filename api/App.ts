@@ -1,15 +1,14 @@
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-import DeviceManagerController from './device-manager/DeviceManagerController';
+import GameController from './src/game/game/GameController';
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
 
-  // ref to Express instance
+  // refs to Express instance and game controller objects
   private static app: express.Application;
-
-  private static deviceManagerController = new DeviceManagerController();
+  private static gameController = new GameController();
 
   //Run configuration methods on the Express instance by building 
   public static buildApp() {
@@ -22,7 +21,6 @@ class App {
     return this.start();
   }
 
-  //check auth here in server cache 
   private static initExpress() {
     console.log("Creating node application...");
     this.app = express();
@@ -48,33 +46,20 @@ class App {
   private static initRoutes() {
     console.log("Initializing application routes...");
 
-    const { app, deviceManagerController } = this;
+    const { app, gameController } = this;
 
     app.get('/', (req, res) => {
-      res.send('get/device-manager')
+      res.send('swe681-game.net')
     });
 
-    app.post("/device-manager/powerOff",  (req: any, res: any) => {
-      const deviceId: string = req.body.deviceId;
-      const farmAddress: string = req.body.farmAddress; 
+    app.get('/api', (req, res) => {
+      res.send('swe681-game.net/api')
+    });
 
-      console.log("Device ID: " + deviceId);
-      console.log("Root Node Address: " + farmAddress);
+    app.post("/api/game/create",  (req: any, res: any) => {
+      console.log("Creating game...");
 
-      return deviceManagerController
-        .powerOff(deviceId, farmAddress)
-        .then((response: any) => {
-          console.log('')
-          res.json({
-            isPoweredOff: response
-          });
-        })
-        .catch((response: any) => {
-          console.log("Error: Failed to connect...")
-          res.status(400).json({
-            isPoweredOff: response
-          });
-        })
+      return gameController.create();
     });
   }
 

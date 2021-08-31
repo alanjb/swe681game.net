@@ -9,7 +9,7 @@ import {
 import HomeContainer from "./components/HomeContainer";
 import ProfileContainer from './components/ProfileContainer';
 import ProtectedRoute from './security/protected-route';
-import DeviceManagerContainer from '../device-manager/DeviceManagerContainer';
+import DashboardContainer from './components/DashboardContainer';
 
 const AppContainer = () => {
   const { isLoading } = useAuth0();
@@ -24,7 +24,7 @@ const AppContainer = () => {
       <div className="">
         <Switch>
           <Route path="/" exact component={HomeContainer} />
-          <ProtectedRoute path="/device-manager" component={DeviceManagerContainer} />
+          <ProtectedRoute path="/dashboard" component={DashboardContainer} />
           <ProtectedRoute path="/profile" component={ProfileContainer} />
         </Switch>
       </div>
