@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 const HomeContainer = () => (
   <Fragment>
-    Home Page
+    Welcome to SWE681 game
   </Fragment>
 );
 
