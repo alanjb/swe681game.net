@@ -8,12 +8,12 @@ const MainNav = () => {
   return (
     <div className="navbar-nav mr-auto">
       <NavLink
-        to="/device-manager"
+        to="/dashboard"
         exact
         className="nav-link"
         activeClassName="router-link-exact-active"
       >
-        Device Manager
+        Dashboard
       </NavLink>
 
       <NavLink
