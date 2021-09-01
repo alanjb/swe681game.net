@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-import GameController from './src/game/game/GameController';
+import GameController from './src/game/GameController';
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
