@@ -1,7 +1,9 @@
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
+import mongodb from 'mongodb';
 import GameController from './src/game/GameController';
+import GameModel from "./src/game/models/Game";
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
@@ -16,8 +18,9 @@ class App {
 
     this.initExpress();
     this.initMiddleware();
+    this.initDatabase();
     this.initRoutes();
-    
+
     return this.start();
   }
 
@@ -43,6 +46,24 @@ class App {
     }
   }
 
+  private static initDatabase() {
+    console.log("Initializing database...");
+
+    const mongoDB = process.env.CONNECTION_STRING;
+    const mongoose = require('mongoose');
+    const db = mongoose.connection;
+    
+    mongoose
+      .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+      .then(() => {
+        console.log("Successfully initialized database...running at " + mongoDB);
+        db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+      })
+      .catch(error => {
+        console.log("Error: " + error);
+      })
+  }
+
   private static initRoutes() {
     console.log("Initializing application routes...");
 
@@ -56,10 +77,27 @@ class App {
       res.send('swe681-game.net/api')
     });
 
-    app.post("/api/game/create",  (req: any, res: any) => {
+    app.post("/api/game/create",  async (req: any, res: any) => {
       console.log("Creating game...");
 
-      return gameController.create();
+      //validate req.body data 
+      const newGame = new GameModel({players: req.body.playersArray});
+
+      return gameController
+        .create(newGame)
+        .then((game) => {
+          console.log("Success: Created new game..." + game);
+          res.json({
+            isGameCreated: true,
+            gameId: game._id
+          })
+        })
+        .catch((error) => {
+          console.log("Error: Failed to create game..." + error);
+          res.json({
+            isGameCreated: false
+          })
+        });
     });
   }
 

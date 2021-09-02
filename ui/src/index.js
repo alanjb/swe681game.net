@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import Auth0ProviderWithHistory from "./app/security/auth0Provider";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 import AppContainer from "./app/AppContainer";
 import dotenv from 'dotenv';
+import history from '../src/app/routing/history';
 
 dotenv.config({ path: './app/config' });
 
 ReactDOM.render(
-    <Router>
+    <Router history={history}>
       <Auth0ProviderWithHistory>
         <AppContainer/>
       </Auth0ProviderWithHistory>
