@@ -11,7 +11,7 @@ class DeviceManagerContainer extends Component {
           </div>
           <div>
             <button onClick={createGame}>
-              Create a game
+              Create new game
             </button>
           </div>
       </Fragment>
@@ -21,11 +21,10 @@ class DeviceManagerContainer extends Component {
 
 function createGame() {
   console.log('creating game...')
-  //use env variables to config this network call
 
   const playersArray = ['john@gmail.com', 'jim@gmail.com'];
 
-  //get other settings
+  //get other settings - use a create new game modal 
   axios
     .post(`http://localhost:8000/api/game/create`, {playersArray: playersArray})
     .then(res => {
