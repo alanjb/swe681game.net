@@ -7,7 +7,7 @@ const MainNav = () => {
 
   return (
     <div className="navbar-nav mr-auto">
-      <NavLink
+      {!isLoading && user && ( <NavLink
         to="/dashboard"
         exact
         className="nav-link"
@@ -15,8 +15,9 @@ const MainNav = () => {
       >
         Dashboard
       </NavLink>
+      )}
 
-      <NavLink
+      {!isLoading && user && (<NavLink
         to="/profile"
         exact
         className="nav-link"
@@ -24,6 +25,7 @@ const MainNav = () => {
       >
         Profile
       </NavLink>
+      )}
 
       {!isLoading && !user && (
         <button 
