@@ -1,16 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-
-require('dotenv').config({path: '../app/config/.env '})
+require('dotenv').config();
 
 const Auth0ProviderWithHistory = ({ children }) => {
 
-  //use env vars here once we get it to work
-  const domain = 'dev-zug4g8vr.us.auth0.com';
-  const clientId = 'F5EuERVao0vUAB2ExXVCZUcV9J3sySkx';
-
+  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const history = useHistory();
+  const redirectPath = '/dashboard';
 
   const onRedirectCallback = (appState) => {
     history.push(appState.returnTo || window.location.pathname);
@@ -20,7 +18,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={window.location.origin + '/device-manager'}
+      redirectUri={window.location.origin + redirectPath}
       onRedirectCallback={onRedirectCallback}
     >
       {children}

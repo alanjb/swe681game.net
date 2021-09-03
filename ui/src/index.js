@@ -4,10 +4,11 @@ import reportWebVitals from './reportWebVitals';
 import Auth0ProviderWithHistory from "./app/security/auth0Provider";
 import { Router } from "react-router-dom";
 import AppContainer from "./app/AppContainer";
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import history from '../src/app/routing/history';
+require('dotenv').config();
 
-dotenv.config({ path: './app/config' });
+// dotenv.config({ path: './app/config' });
 
 ReactDOM.render(
     <Router history={history}>
