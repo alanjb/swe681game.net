@@ -99,6 +99,31 @@ class App {
           })
         });
     });
+
+    app.delete("/api/player/deck/discard",  async (req: any, res: any) => {
+      console.log("Discard selected cards...");
+
+      console.log({data: req.body.data})
+
+      //validate req.body data 
+      // const newGame = new GameModel({players: req.body.playersArray});
+
+      // return gameController
+      //   .create(newGame)
+      //   .then((game) => {
+      //     console.log("Success: Created new game..." + game);
+      //     res.json({
+      //       isGameCreated: true,
+      //       gameId: game._id
+      //     })
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error: Failed to create game..." + error);
+      //     res.json({
+      //       isGameCreated: false
+      //     })
+      //   });
+    });
   }
 
   private static start() {

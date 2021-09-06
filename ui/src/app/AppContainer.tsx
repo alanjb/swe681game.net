@@ -10,6 +10,7 @@ import HomeContainer from "./components/HomeContainer";
 import ProfileContainer from './components/ProfileContainer';
 import ProtectedRoute from './security/protected-route';
 import DashboardContainer from './components/DashboardContainer';
+import GameContainer from '../game/components/GameContainer';
 
 const AppContainer = () => {
   const { isLoading } = useAuth0();
@@ -26,6 +27,7 @@ const AppContainer = () => {
           <Route path="/" exact component={HomeContainer} />
           <ProtectedRoute path="/dashboard" component={DashboardContainer} />
           <ProtectedRoute path="/profile" component={ProfileContainer} />
+          <ProtectedRoute path="/game/:gameId" component={GameContainer} />
         </Switch>
       </div>
     </div>
