@@ -6,7 +6,7 @@ import fs from 'fs';
 
 
 //access to environment variables
-dotenv.config({ path: './config/.env' });
+dotenv.config();
 
 //prod env port
 const HTTPS_PORT = process.env.HTTPS_PORT;
@@ -28,14 +28,14 @@ if (app) {
         console.log('Creating HTTP server for DEV...');
 
         server = http.createServer(app);
-    } else {
+    } else if(ENVIRONMENT === 'PROD') {
         console.log('Creating HTTPS server for PROD...');
 
-        const privateKey = fs.readFileSync('/etc/pki/tls/private/privkey.key', 'utf8');
-        const certificate = fs.readFileSync('/etc/pki/tls/certs/custom.crt', 'utf8');
-        const credentials = { key: privateKey, cert: certificate };
+        // const privateKey = fs.readFileSync('/etc/pki/tls/private/privkey.key', 'utf8');
+        // const certificate = fs.readFileSync('/etc/pki/tls/certs/custom.crt', 'utf8');
+        // const credentials = { key: privateKey, cert: certificate };
     
-        server = https.createServer(credentials, app);
+        // server = https.createServer(credentials, app);
     }
 
     if (server) {

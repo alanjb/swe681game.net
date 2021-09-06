@@ -1,9 +1,9 @@
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-import mongodb from 'mongodb';
 import GameController from '../game/GameController';
 import GameModel from "../game/models/Game";
+import CardModel from "../game/models/Card";
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
@@ -101,28 +101,29 @@ class App {
     });
 
     app.delete("/api/player/deck/discard",  async (req: any, res: any) => {
-      console.log("Discard selected cards...");
+      const cardsToDiscard = req.body;
+      const playingCardRegex = /^(Ace|Jack|Queen|King|2|3|4|5|6|7|8|9|10)( of )(Clubs|Diamonds|Hearts|Spades)$/;
 
-      console.log({data: req.body.data})
+      await cardsToDiscard.forEach(card => {
+        const cardType = card.face + ' of ' + card.suit;
+        
+        if (cardType.match(playingCardRegex)) {
+        
+          const cardToDiscard = new CardModel({id: card.id, face: card.face, suit: card.suit});
 
-      //validate req.body data 
-      // const newGame = new GameModel({players: req.body.playersArray});
-
-      // return gameController
-      //   .create(newGame)
-      //   .then((game) => {
-      //     console.log("Success: Created new game..." + game);
-      //     res.json({
-      //       isGameCreated: true,
-      //       gameId: game._id
-      //     })
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error: Failed to create game..." + error);
-      //     res.json({
-      //       isGameCreated: false
-      //     })
-      //   });
+          gameController
+            .discard(cardToDiscard)
+            .then(response => {
+              // console.log(response, 'discarded...')
+            })
+            .catch(error => {
+              console.log(error)
+            });
+        }
+        else {
+          console.log('ERROR! Regex match failed.')
+        }
+      })
     });
   }
 

@@ -13,6 +13,19 @@ class GameController {
         return response;
       }) 
   }
+
+  public discard(card) {
+    return card
+      .remove()
+      .then((response) => {
+        console.log("Database remove success - Card DISCARDED: " + response);
+        return response;
+      })
+      .catch((response) => {
+        console.log("Database save error - Card NOT DISCARDED " + response);
+        return response;
+      }) 
+  }
 }
 
 export default GameController;

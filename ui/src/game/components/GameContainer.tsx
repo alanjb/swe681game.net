@@ -21,7 +21,7 @@ class DeviceManagerContainer extends Component {
 function discardSelectedCards() {
   console.log('Discard selected cards...')
 
-  const selectedCardsToDiscard = ['Ace of Spades', 'King of Hearts'];
+  const selectedCardsToDiscard = [{ id: 123, face: 'Ace', suit: 'Spades'}];
 
   //get other settings - use a create new game modal 
   axios
