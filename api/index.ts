@@ -1,4 +1,4 @@
-import App from './App';
+import App from './src/app/App';
 import dotenv from 'dotenv';
 import https from 'https';
 import http from 'http';

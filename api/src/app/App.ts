@@ -2,8 +2,8 @@ import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
 import mongodb from 'mongodb';
-import GameController from './src/game/GameController';
-import GameModel from "./src/game/models/Game";
+import GameController from '../game/GameController';
+import GameModel from "../game/models/Game";
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
