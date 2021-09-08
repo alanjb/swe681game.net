@@ -4,6 +4,7 @@ import cors from 'cors';
 import GameController from '../game/GameController';
 import GameModel from "../game/models/Game";
 import CardModel from "../game/models/Card";
+import { CARD_REGEX } from './utils'
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
@@ -102,12 +103,11 @@ class App {
 
     app.delete("/api/player/deck/discard",  async (req: any, res: any) => {
       const cardsToDiscard = req.body;
-      const playingCardRegex = /^(Ace|Jack|Queen|King|2|3|4|5|6|7|8|9|10)( of )(Clubs|Diamonds|Hearts|Spades)$/;
 
       await cardsToDiscard.forEach(card => {
         const cardType = card.face + ' of ' + card.suit;
-        
-        if (cardType.match(playingCardRegex)) {
+
+        if (cardType.match(CARD_REGEX)) {
         
           const cardToDiscard = new CardModel({id: card.id, face: card.face, suit: card.suit});
 
