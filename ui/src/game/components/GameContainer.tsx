@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { Component, Fragment } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import backOfCard from '../../assets/back.png';
 
 class DeviceManagerContainer extends Component {
 
@@ -17,9 +19,13 @@ class DeviceManagerContainer extends Component {
 
           <div className="player-container opposing-player-container4 play"> 
             <div className="player-cards-container">
-              card svgs will go here face down...
+            <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
             </div>
-            <br/><br/>
+            <br/>
             <div className="player-username-container">
               user4
             </div>
@@ -27,9 +33,13 @@ class DeviceManagerContainer extends Component {
 
           <div className="player-container opposing-player-container3 play"> 
             <div className="player-cards-container">
-              card svgs will go here face down...
+            <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
             </div>
-            <br/><br/>
+            <br/>
             <div className="player-username-container">
               user3
             </div>
@@ -37,9 +47,13 @@ class DeviceManagerContainer extends Component {
 
           <div className="player-container opposing-player-container2 play"> 
             <div className="player-cards-container">
-              card svgs will go here face down...
+            <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
             </div>
-            <br/><br/>
+            <br/>
             <div className="player-username-container">
               user2
             </div>
@@ -47,9 +61,13 @@ class DeviceManagerContainer extends Component {
 
           <div className="player-container opposing-player-container1 play"> 
             <div className="player-cards-container">
-              card svgs will go here face down...
+            <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
             </div>
-            <br/><br/>
+            <br/>
             <div className="player-username-container">
               user1
             </div>
@@ -57,9 +75,13 @@ class DeviceManagerContainer extends Component {
 
           <div className="player-container opposing-player-container0 play"> 
             <div className="player-cards-container">
-              <img src="../../../assets/back.png" width="20" height="40"></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
             </div>
-            <br/><br/>
+            <br/>
             <div className="player-username-container">
               user0
             </div>
@@ -67,8 +89,13 @@ class DeviceManagerContainer extends Component {
 
           <div className="player-container user-player-container"> 
             <div className="player-cards-container">
-              card svgs will go here face up...
+            <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
+              <img className="backOfCard" src={backOfCard}></img>
             </div>
+            <br/>
             <div className="player-username-container">
               boyce.alan21
             </div>
