@@ -1,29 +1,94 @@
-import React, { Component, Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 class DeviceManagerContainer extends Component {
 
   render() {
     return (
       <Fragment>
-        <div className="game-board-container container">
+        <div className="game-board-container">
           <div className="chip-pot-container">
-          pot
-            <div className="pot">
-              
+            <div className="pot-data">
+              Total Pot <br/><br/>
+              $10.00
             </div>
           </div>
-            {/* <button onClick={this.discardSelectedCards}>
-              Discard selected cards
-            </button> */}
-              <div className="user-player-container"> 
-                player 1
-              </div>
-              
-              <div className="user-player-container"> 
-                player 1
-              </div>
+
+          <div className="player-container opposing-player-container4 play"> 
+            <div className="player-cards-container">
+              card svgs will go here face down...
+            </div>
+            <br/><br/>
+            <div className="player-username-container">
+              user4
+            </div>
           </div>
+
+          <div className="player-container opposing-player-container3 play"> 
+            <div className="player-cards-container">
+              card svgs will go here face down...
+            </div>
+            <br/><br/>
+            <div className="player-username-container">
+              user3
+            </div>
+          </div>
+
+          <div className="player-container opposing-player-container2 play"> 
+            <div className="player-cards-container">
+              card svgs will go here face down...
+            </div>
+            <br/><br/>
+            <div className="player-username-container">
+              user2
+            </div>
+          </div>
+
+          <div className="player-container opposing-player-container1 play"> 
+            <div className="player-cards-container">
+              card svgs will go here face down...
+            </div>
+            <br/><br/>
+            <div className="player-username-container">
+              user1
+            </div>
+          </div>
+
+          <div className="player-container opposing-player-container0 play"> 
+            <div className="player-cards-container">
+              <img src="../../../assets/back.png" width="20" height="40"></img>
+            </div>
+            <br/><br/>
+            <div className="player-username-container">
+              user0
+            </div>
+          </div>
+
+          <div className="player-container user-player-container"> 
+            <div className="player-cards-container">
+              card svgs will go here face up...
+            </div>
+            <div className="player-username-container">
+              boyce.alan21
+            </div>
+            <br /><br/>
+            <div className="player-game-controls-container">
+              <Button variant="primary" onClick={this.discardSelectedCards}>
+                Fold
+              </Button>
+              <Button variant="primary" onClick={this.discardSelectedCards}>
+                Check
+              </Button>
+              <Button variant="primary" onClick={this.discardSelectedCards}>
+                Bet
+              </Button>
+                <Button variant="danger" onClick={this.discardSelectedCards}>
+                Discard 
+              </Button> 
+            </div>
+          </div>
+        </div>
       </Fragment>
     );
   }

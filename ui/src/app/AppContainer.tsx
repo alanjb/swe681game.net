@@ -1,4 +1,3 @@
-import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/Loading";
 import NavbarContainer from "./components/NavbarContainer";
@@ -22,12 +21,12 @@ const AppContainer = () => {
   return (
     <div className="app-container">
       <NavbarContainer />
-        <Switch>
-          <Route path="/" exact component={HomeContainer} />
-          <ProtectedRoute path="/dashboard" component={DashboardContainer} />
-          <ProtectedRoute path="/profile" component={ProfileContainer} />
-          <ProtectedRoute path="/game/:gameId" component={GameContainer} />
-        </Switch>
+      <Switch>
+        <Route path="/" exact component={HomeContainer} />
+        <ProtectedRoute path="/dashboard" component={DashboardContainer} />
+        <ProtectedRoute path="/profile" component={ProfileContainer} />
+        <ProtectedRoute path="/game/:gameId" component={GameContainer} />
+      </Switch>
     </div>
   );
 };
