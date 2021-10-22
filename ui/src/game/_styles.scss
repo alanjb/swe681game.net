@@ -23,14 +23,14 @@ html, body {
 .game-board-container {
     width: 100%;
     height: 100%;
-    background-color: green;
+    background-color: #008b48;
     position: absolute;
     left: 0;
     text-align: right;
 
     .chip-pot-container {
         text-align: center;
-        position: absolute;
+        position: fixed;
         left: 45%;
         top: 45%;
     }

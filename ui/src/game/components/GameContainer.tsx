@@ -112,7 +112,11 @@ class DeviceManagerContainer extends Component {
               </Button>
                 <Button variant="danger" onClick={this.discardSelectedCards}>
                 Discard 
-              </Button> 
+              </Button>
+            </div>
+            <br/>
+            <div>
+              Your money: $50.00
             </div>
           </div>
         </div>
