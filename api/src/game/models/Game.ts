@@ -5,7 +5,8 @@ const GameSchema = new mongoose.Schema({
   players: {
     type: Array,
     default: [],
-  }
+  },
+  numPlayers: Number
 });
 
 const Game = mongoose.model("Game", GameSchema);

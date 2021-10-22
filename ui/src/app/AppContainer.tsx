@@ -20,16 +20,14 @@ const AppContainer = () => {
   }
 
   return (
-    <div id="app" className="test">
+    <div className="app-container">
       <NavbarContainer />
-      <div className="">
         <Switch>
           <Route path="/" exact component={HomeContainer} />
           <ProtectedRoute path="/dashboard" component={DashboardContainer} />
           <ProtectedRoute path="/profile" component={ProfileContainer} />
           <ProtectedRoute path="/game/:gameId" component={GameContainer} />
         </Switch>
-      </div>
     </div>
   );
 };

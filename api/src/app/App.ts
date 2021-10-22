@@ -101,29 +101,30 @@ class App {
         });
     });
 
-    app.delete("/api/player/deck/discard",  async (req: any, res: any) => {
+    app.delete("/api/player/deck/discard", async (req: any, res: any) => {
       const cardsToDiscard = req.body;
 
-      await cardsToDiscard.forEach(card => {
-        const cardType = card.face + ' of ' + card.suit;
+      await cardsToDiscard
+        .forEach(card => {
+          const cardType = card.face + ' of ' + card.suit;
 
-        if (cardType.match(CARD_REGEX)) {
+          if (cardType.match(CARD_REGEX)) {
         
-          const cardToDiscard = new CardModel({id: card.id, face: card.face, suit: card.suit});
+            const cardToDiscard = new CardModel({id: card.id, face: card.face, suit: card.suit});
 
-          gameController
-            .discard(cardToDiscard)
-            .then(response => {
-              // console.log(response, 'discarded...')
-            })
-            .catch(error => {
-              console.log(error)
-            });
-        }
-        else {
-          console.log('ERROR! Regex match failed.')
-        }
-      })
+            gameController
+              .discard(cardToDiscard)
+              .then(response => {
+                // console.log(response, 'discarded...')
+              })
+              .catch(error => {
+                console.log(error)
+              });
+          }
+          else {
+            console.log('ERROR! Regex match failed.')
+          }
+        })
     });
   }
 
