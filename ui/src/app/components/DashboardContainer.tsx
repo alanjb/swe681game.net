@@ -16,7 +16,7 @@ class DeviceManagerContainer extends Component {
     return (
       <Fragment>
         <div className="dashboard-container">
-          <Container className="dashboard-header themed-container" fluid={true}>
+          <Container className="component-container dashboard-header themed-container" fluid={true}>
             <Row>
               <Col>
                 <h2 className="dashboard-header-text">Dashboard</h2>
