@@ -82,7 +82,9 @@ class App {
       console.log("Creating game...");
 
       //validate req.body data 
-      const newGame = new GameModel({players: req.body.playersArray});
+      const newGame = new GameModel(req.body);
+
+      console.log(newGame)
 
       return gameController
         .create(newGame)
@@ -90,7 +92,7 @@ class App {
           console.log("Success: Created new game..." + game);
           res.json({
             isGameCreated: true,
-            gameId: game._id
+            game: game
           })
         })
         .catch((error) => {

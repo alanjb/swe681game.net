@@ -10,37 +10,6 @@ html, body {
 }
 
 
-.navigation-container {
-    display: flex;
-    justify-content: space-between;
-    background-color: black;
-    text-align: right;
-    align-items: center;
-    color: white;
-
-    .logo {
-        margin-left: 10px;
-    }
-
-    .nav-link {
-        margin-right: 15px;
-        color: white;
-    }
-
-    .log-button {
-        border-radius: 0px;
-    }
-}
-
-.navbar {
-    display: flex;
-    padding: 0px;
-}
-
-.dashboard-container{
-    text-align: right;
-    margin: 10px;
-}
 
 .game-board-container {
     width: 100%;

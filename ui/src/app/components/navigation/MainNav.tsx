@@ -7,7 +7,7 @@ const MainNav = () => {
   const { loginWithRedirect, logout, user, isLoading } = useAuth0(); 
 
   return (
-    <div className="navbar">
+    <div className="navigation-links">
       {!isLoading && user && ( <NavLink
         to="/dashboard"
         exact

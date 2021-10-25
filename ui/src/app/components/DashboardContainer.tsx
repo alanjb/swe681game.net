@@ -2,6 +2,7 @@ import { Component, Fragment } from 'react';
 import history from '../routing/history';
 import CreateGameModal from '../../game/components/CreateGameModal';
 import { Button } from 'reactstrap';
+import Game from '../../game/models/Game';
 
 class DeviceManagerContainer extends Component {
   state: State = {
@@ -25,11 +26,10 @@ class DeviceManagerContainer extends Component {
   }
 
   toggleCreateGameModal = () => {
-    console.log('toggle')
     this.setState({ isCreateGameModalOpen: !this.state.isCreateGameModalOpen });
   };
 
-  gameCreated = () => {
+  gameCreated = (game: Game) => {
     const { toggleCreateGameModal } = this;
 
     toggleCreateGameModal();
