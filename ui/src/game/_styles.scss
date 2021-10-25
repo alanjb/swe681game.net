@@ -3,8 +3,12 @@ html, body {
     margin: 0; 
     height: 100%; 
     overflow: hidden;
-    color: white;
 }
+
+.btn {
+    border-radius: 2px;
+}
+
 
 .navigation-container {
     display: flex;
@@ -14,10 +18,28 @@ html, body {
     align-items: center;
     color: white;
 
+    .logo {
+        margin-left: 10px;
+    }
+
     .nav-link {
         margin-right: 15px;
         color: white;
     }
+
+    .log-button {
+        border-radius: 0px;
+    }
+}
+
+.navbar {
+    display: flex;
+    padding: 0px;
+}
+
+.dashboard-container{
+    text-align: right;
+    margin: 10px;
 }
 
 .game-board-container {

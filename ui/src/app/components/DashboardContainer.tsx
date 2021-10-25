@@ -14,15 +14,12 @@ class DeviceManagerContainer extends Component {
 
     return (
       <Fragment>
-          <div id="dashboard-container">
-            SWE681 game dashboard
-          </div>
-          <div>
+          <div className="dashboard-container">
             <Button color="info" onClick={toggleCreateGameModal}>
               Create new game
             </Button>
-          <CreateGameModal isOpen={isCreateGameModalOpen} toggle={toggleCreateGameModal} created={gameCreated} />
           </div>
+          <CreateGameModal isOpen={isCreateGameModalOpen} toggle={toggleCreateGameModal} created={gameCreated} />
       </Fragment>
     );
   }

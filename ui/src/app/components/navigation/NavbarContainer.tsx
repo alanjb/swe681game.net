@@ -5,7 +5,7 @@ import MainNav from "./MainNav";
 const NavBarContainer = () => {
   return (
     <div className="navigation-container">
-      <div>
+      <div className="logo">
         Poker 101
       </div>
       <MainNav />

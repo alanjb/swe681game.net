@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {Modal, ModalBody} from 'reactstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 
 class CreateGameModal extends Component<Props> {
   render() {
@@ -7,9 +7,13 @@ class CreateGameModal extends Component<Props> {
 
     return (
       <Modal size="lg" {...{ isOpen, toggle }}>
+        <ModalHeader>Create New Game</ModalHeader>
         <ModalBody>
           test
         </ModalBody>
+        <ModalFooter>
+          <Button color="primary">Create Game</Button>
+        </ModalFooter>
       </Modal>
     );
   }
