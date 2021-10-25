@@ -86,7 +86,7 @@ class CreateGameModal extends Component<Props> {
         }
       })
       .catch(error => {
-        alert("Error! Failed to create game: \n\n" + error);
+        alert("Error! Failed to create game \n\n" + error);
       })
   }
 }
