@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -19,7 +19,6 @@ const ProfileComponent = () => {
     <div className="row align-items-center profile-header">
       <div className="col-md text-center text-md-left">
         <p className="lead text-muted">USER EMAIL: {user?.email}</p>
-        <img src={user?.picture}/>
       </div>
     </div>
   )

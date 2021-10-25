@@ -1,5 +1,5 @@
 export default interface Card {
   id: String;
-  face: String;
+  symbol: String;
   suit: String;
 }

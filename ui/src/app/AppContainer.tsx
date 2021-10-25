@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import HomeContainer from "./components/HomeContainer";
-import ProfileContainer from '../profile/ProfileContainer';
+import ProfileContainer from '../profile/components/ProfileContainer';
 import ProtectedRoute from './security/protected-route';
 import DashboardContainer from './components/DashboardContainer';
 import GameContainer from '../game/components/GameContainer';

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 
 class CreateGameModal extends Component<Props> {
   render() {
@@ -9,7 +9,20 @@ class CreateGameModal extends Component<Props> {
       <Modal size="lg" {...{ isOpen, toggle }}>
         <ModalHeader>Create New Game</ModalHeader>
         <ModalBody>
-          test
+          <Form>
+            <FormGroup>
+              <Label for="exampleEmail">Required chips per player</Label>
+              <Input type="email" name="email" id="exampleEmail" /><br/>
+            </FormGroup>
+            <FormGroup>
+              <Label for="examplePassword">Anti price</Label>
+              <Input type="password" name="password" id="examplePassword" /><br/>
+            </FormGroup>
+            <FormGroup>
+              <Label for="examplePassword">Invite players (up to 5)</Label>
+              <Input type="password" name="password" id="examplePassword" /><br/>
+            </FormGroup>
+          </Form>
         </ModalBody>
         <ModalFooter>
           <Button color="primary">Create Game</Button>
