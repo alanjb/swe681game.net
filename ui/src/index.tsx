@@ -5,7 +5,8 @@ import { Router } from "react-router-dom";
 import AppContainer from "./app/AppContainer";
 import dotenv from 'dotenv';
 import history from './app/routing/history';
-import './styles/main.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './app/styles/main.scss'
 
 dotenv.config();
 

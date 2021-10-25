@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Component, Fragment } from 'react';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
-import backOfCard from '../../assets/back.png';
+import backOfCard from '../../app/assets/back.png';
+import { Button } from 'reactstrap';
 
 class DeviceManagerContainer extends Component {
 

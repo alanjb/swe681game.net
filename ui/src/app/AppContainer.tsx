@@ -1,12 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/Loading";
-import NavbarContainer from "./components/NavbarContainer";
+import NavbarContainer from "./components/navigation/NavbarContainer";
 import {
   Switch,
   Route,
 } from "react-router-dom";
 import HomeContainer from "./components/HomeContainer";
-import ProfileContainer from './components/ProfileContainer';
+import ProfileContainer from '../profile/ProfileContainer';
 import ProtectedRoute from './security/protected-route';
 import DashboardContainer from './components/DashboardContainer';
 import GameContainer from '../game/components/GameContainer';

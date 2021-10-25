@@ -1,27 +1,49 @@
-import React, { Component, Fragment } from 'react';
-import axios from 'axios';
+import { Component, Fragment } from 'react';
 import history from '../routing/history';
+import CreateGameModal from '../../game/components/CreateGameModal';
+import { Button } from 'reactstrap';
 
 class DeviceManagerContainer extends Component {
+  state: State = {
+    isCreateGameModalOpen: false,
+  };
+
   render() {
+    const { isCreateGameModalOpen } = this.state;
+    const { toggleCreateGameModal, gameCreated } = this;
+
     return (
       <Fragment>
           <div id="dashboard-container">
             SWE681 game dashboard
           </div>
           <div>
-            <button onClick={this.createGame}>
+            <Button color="info" onClick={toggleCreateGameModal}>
               Create new game
-            </button>
+            </Button>
+          <CreateGameModal isOpen={isCreateGameModalOpen} toggle={toggleCreateGameModal} created={gameCreated} />
           </div>
       </Fragment>
     );
   }
 
+  toggleCreateGameModal = () => {
+    console.log('toggle')
+    this.setState({ isCreateGameModalOpen: !this.state.isCreateGameModalOpen });
+  };
+
+  gameCreated = () => {
+    const { toggleCreateGameModal } = this;
+
+    toggleCreateGameModal();
+
+    history.push(`/game/${1}`);
+  }
+
   createGame() {
     console.log('creating game...');
-  
-    const playersArray = ['john@gmail.com', 'jim@gmail.com'];
+
+    // const playersArray = ['john@gmail.com', 'jim@gmail.com'];
   
     //get other settings - use a create new game modal 
   //   axios
@@ -40,6 +62,10 @@ class DeviceManagerContainer extends Component {
   //       alert("Error! Failed to create game: " + error);
   //     })
   }
+}
+
+type State = {
+  isCreateGameModalOpen: boolean;
 }
 
 export default DeviceManagerContainer;

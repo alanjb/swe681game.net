@@ -4,7 +4,7 @@ import MainNav from "./MainNav";
 
 const NavBarContainer = () => {
   return (
-    <div className="nav-container mb-3">
+    <div className="navigation-container">
       <div>
         Poker 101
       </div>
