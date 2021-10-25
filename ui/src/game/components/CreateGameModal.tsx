@@ -14,21 +14,22 @@ class CreateGameModal extends Component<Props> {
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="exampleEmail">Required chips per player</Label>
+              <Label className="label-text" for="exampleEmail">Required chips per player</Label>
               <Input type="email" name="email" id="exampleEmail" /><br/>
             </FormGroup>
             <FormGroup>
-              <Label for="examplePassword">Anti price</Label>
+              <Label className="label-text" for="examplePassword">Anti price</Label>
               <Input type="password" name="password" id="examplePassword" /><br/>
             </FormGroup>
             <FormGroup>
-              <Label for="examplePassword">Invite players (up to 5)</Label>
+              <Label className="label-text" for="examplePassword">Invite players (up to 5)</Label>
               <Input type="password" name="password" id="examplePassword" /><br/>
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={create}>Create</Button>
+          <Button color="warning" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
     );
@@ -53,8 +54,6 @@ class CreateGameModal extends Component<Props> {
       .catch(error => {
         alert("Error! Failed to create game: " + error);
       })
-
-    
   }
 }
 

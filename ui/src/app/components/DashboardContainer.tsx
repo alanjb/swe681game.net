@@ -16,10 +16,10 @@ class DeviceManagerContainer extends Component {
     return (
       <Fragment>
         <div className="dashboard-container">
-          <Container className="dashboard-content themed-container" fluid={true}>
+          <Container className="dashboard-header themed-container" fluid={true}>
             <Row>
               <Col>
-                <h2 className="dashboard-header">Dashboard</h2>
+                <h2 className="dashboard-header-text">Dashboard</h2>
               </Col>
               <Col>
                 <div className="create-button-container justify-content-end">
@@ -32,7 +32,7 @@ class DeviceManagerContainer extends Component {
             <Row>
               <Col>
                 <div>
-                  test
+                  
                 </div>
               </Col>
             </Row>

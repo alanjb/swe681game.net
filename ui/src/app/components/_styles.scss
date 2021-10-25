@@ -5,12 +5,12 @@
     position: absolute;
     left: 0;
 
-    .dashboard-content {
+    .dashboard-header {
         margin-top: 20px;
         margin-left: auto; 
         margin-right: 0;
 
-        .dashboard-header {
+        .dashboard-header-text {
             font-size: 30px;
             color: white;
         }
@@ -46,5 +46,22 @@
     .navigation-links {
         display: flex;
         padding: 0px;
+    }
+}
+
+.modal-content{
+    background-color: #3c3d3b;
+    color: white;
+
+    .modal-header {
+        border-bottom: 1px solid black;
+    }
+
+    .modal-footer {
+        border-top: 1px solid black;
+    }
+
+    .label-text {
+        margin-bottom: 10px;
     }
 }
