@@ -9,7 +9,7 @@ const gameCreationPlayerValidation = {
 };
 
 const gameCreationValidation = joi.object({
-  requiredPointsPerPlayer: joi.number().required(),
+  requiredPointsPerPlayer: joi.number().required().positive(),
   antiAmount: joi.number().required(),
   players: joi.array().items(joi.object(gameCreationPlayerValidation)),
 });
