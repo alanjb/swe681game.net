@@ -4,6 +4,21 @@
     background-color: #3c3d3b;
     position: absolute;
     left: 0;
+
+    .dashboard-content {
+        margin-top: 20px;
+        margin-left: auto; 
+        margin-right: 0;
+
+        .dashboard-header {
+            font-size: 30px;
+            color: white;
+        }
+
+        .create-button-container {
+            display: flex;
+        }
+    }
 }
 
 .navigation-container {
@@ -15,7 +30,7 @@
     color: white;
 
     .logo {
-        margin-left: 10px;
+        margin-left: 15px;
         font-weight: 900;
     }
 
