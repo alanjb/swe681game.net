@@ -2,13 +2,22 @@ import mongoose, { Schema } from 'mongoose';
 import { PlayerSchema } from "./Player";
 import { CardSchema } from "./Card";
 
-//add validation here 
 export const GameSchema = new Schema({
-  id: String,
-  pot: Number,
+  id: {
+    type: String,
+		required: true,
+  },
+  pot: {
+    type: Number,
+		required: true,
+		trim: true,
+  },
   roundCount: Number,
   status: String,
-  players: [PlayerSchema],
+  players: {
+    type: [PlayerSchema],
+
+  },
   deck: [CardSchema],
   requiredPointsPerPlayer: Number,
   antiAmount: Number

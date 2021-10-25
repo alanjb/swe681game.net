@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import Card from './Card';
+import { Card } from './Card';
 
 //add validation here 
 export const DeckSchema = new Schema({

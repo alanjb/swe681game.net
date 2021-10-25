@@ -4,7 +4,8 @@ import cors from 'cors';
 import GameController from '../game/GameController';
 import {Game} from "../game/models/Game";
 import { Card } from "../game/models/Card";
-import { CARD_REGEX } from './utils'
+import { CARD_REGEX, errorFunction } from './utils';
+import { gameValidationMiddleware } from '../game/validation/GameValidation';
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
 class App {
@@ -78,31 +79,41 @@ class App {
       res.send('swe681-game.net/api')
     });
 
-    app.post("/api/game/create", async (req: any, res: any) => {
+    app.post("/api/game/create", gameValidationMiddleware, async (req: any, res: any) => {
       //validate req.body data 
-      const newGame = new Game({
-        players: req.body.game.players,
-        requiredPointsPerPlayer: req.body.game.requiredPointsPerPlayer,
-        antiAmount: req.body.game.antiAmount
-      });
+      try {
+        const newGame = new Game({
+          players: req.body.game.players,
+          requiredPointsPerPlayer: req.body.game.requiredPointsPerPlayer,
+          antiAmount: req.body.game.antiAmount
+        });
 
-      console.log(newGame)
+        console.log(newGame);
+        
+        return await gameController
+        .create(newGame)
+        .then((game) => {
+          console.log("Success: Created new game..." + game);
+          res.json({
+            isGameCreated: true,
+            game: game
+          })
+        })
+        .catch((error) => {
+          console.log("Error: Failed to create game..." + error);
+          res.json({
+            isGameCreated: false
+          })
+        });
+      } catch (error) {
+        res.status(403);
+				return res.json(errorFunction(true, "Error Creating User"));
+      }
 
-      // return gameController
-      //   .create(newGame)
-      //   .then((game) => {
-      //     console.log("Success: Created new game..." + game);
-      //     res.json({
-      //       isGameCreated: true,
-      //       game: game
-      //     })
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error: Failed to create game..." + error);
-      //     res.json({
-      //       isGameCreated: false
-      //     })
-      //   });
+
+      
+
+
     });
 
     app.delete("/api/player/deck/discard", async (req: any, res: any) => {
