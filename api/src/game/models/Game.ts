@@ -5,18 +5,15 @@ import { CardSchema } from "./Card";
 export const GameSchema = new Schema({
   id: {
     type: String,
-		required: true,
   },
   pot: {
     type: Number,
-		required: true,
 		trim: true,
   },
   roundCount: Number,
   status: String,
   players: {
     type: [PlayerSchema],
-
   },
   deck: [CardSchema],
   requiredPointsPerPlayer: Number,

@@ -15,16 +15,16 @@ class CreateGameModal extends Component<Props> {
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label className="label-text" for="exampleEmail">Required chips per player</Label>
+              <Label className="label-text" for="">Required chips per player</Label>
               <Input type="email" name="email" id="exampleEmail" /><br/>
             </FormGroup>
             <FormGroup>
-              <Label className="label-text" for="examplePassword">Anti price</Label>
-              <Input type="password" name="password" id="examplePassword" /><br/>
+              <Label className="label-text" for="">Anti price</Label>
+              <Input type="text" name="" id="" /><br/>
             </FormGroup>
             <FormGroup>
-              <Label className="label-text" for="examplePassword">Invite players (up to 5)</Label>
-              <Input type="password" name="password" id="examplePassword" /><br/>
+              <Label className="label-text" for="">Invite players (up to 5)</Label>
+              <Input type="text" name="" id="" /><br/>
             </FormGroup>
           </Form>
         </ModalBody>
@@ -38,44 +38,30 @@ class CreateGameModal extends Component<Props> {
 
   create = () => {
     const { created } = this.props;
-    const playersArray: Player[] = [];
+    const playersArray: Partial<Player>[] = [];
 
-    //Below is for testing
-
-    const p1: Player = {
-      id: "000",
-      folded: false,
-      hand: [],
-      isDealer: false,
-      points: 0
+    const p1: Partial<Player> = {
+      id: 'gf93j023jg',
+      points: 3823
     }
 
-    const p2: Player = {
-      id: "111",
-      folded: false,
-      hand: [],
-      isDealer: false,
-      points: 0
+    const p2: Partial<Player> = {
+      id: '390gj3h8g2',
+      points: 8390
     }
 
     playersArray.push(p1);
     playersArray.push(p2);
 
-
     //use Partial here, only need requiredPointsPerPlayer, antiAmount, players
-    const newGame: Game = {
-      id: "0",
-      pot: 0,
-      roundCount: 1,
-      status: "starting",
-      players: playersArray,
-      deck: [],
-      requiredPointsPerPlayer: 500,
-      antiAmount: 5000
+    const newGame: Partial<Game> = {
+      requiredPointsPerPlayer: 5000,
+      antiAmount: 250,
+      players: playersArray
     }
   
     axios
-      .post(`http://localhost:8000/api/game/create`, {game: newGame})
+      .post(`http://localhost:8000/api/game/create`, { game: newGame })
       .then(res => {
         if(res.data){
           const { game } = res.data;
@@ -86,7 +72,7 @@ class CreateGameModal extends Component<Props> {
         }
       })
       .catch(error => {
-        alert("Error! Failed to create game \n\n" + error);
+        alert("Failed to create game \n\n" + error);
       })
   }
 }

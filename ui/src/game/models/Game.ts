@@ -6,7 +6,7 @@ export default interface Game {
   pot: Number;
   roundCount: Number;
   status: String;
-  players: Player[];
+  players: Partial<Player>[];
   deck: Card[];
   requiredPointsPerPlayer: Number;
   antiAmount: Number;

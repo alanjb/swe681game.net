@@ -1,19 +1,23 @@
 import joi from "joi";
 import { errorFunction } from "../../app/utils";
 import { PlayerSchema } from "../models/Player";
+import { Game } from "../models/Game";
 
 const gameCreationPlayerValidation = {
-  points: joi.number().integer().min(0)
+  id: joi.string(),
+  points: joi.number(),
 };
 
 const gameCreationValidation = joi.object({
-  requiredPointsPerPlayer: joi.number().greater(0).required(),
-  antiAmount: joi.number().greater(0).required(),
-  players: joi.array().items(joi.object(gameCreationPlayerValidation)).default([]),
+  requiredPointsPerPlayer: joi.number().required(),
+  antiAmount: joi.number().required(),
+  players: joi.array().items(joi.object(gameCreationPlayerValidation)),
 });
 
 //middleware function - https://www.bacancytechnology.com/blog/joi-validation-in-nodejs-and-express
 export const gameValidationMiddleware = (req, res, next) => {
+  console.log('Running game creation validation...');
+  
   if (req == null) {
     res.status(406);
       
@@ -24,9 +28,9 @@ export const gameValidationMiddleware = (req, res, next) => {
 
   else {
     const payload = {
-      requiredPointsPerPlayer: req.requiredPointsPerPlayer,
-      antiAmount: req.antiAmount,
-      players: req.players,
+      requiredPointsPerPlayer: req.body.game.requiredPointsPerPlayer,
+      antiAmount: req.body.game.antiAmount,
+      players: req.body.game.players,
     };
   
     const { error } = gameCreationValidation.validate(payload);
@@ -35,7 +39,7 @@ export const gameValidationMiddleware = (req, res, next) => {
       res.status(406);
       
       return res.json(
-        errorFunction(true, `Error in User Data : ${error.message}`)
+        errorFunction(true, `${error}`)
       );
     }
     else {

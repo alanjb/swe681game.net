@@ -80,7 +80,6 @@ class App {
     });
 
     app.post("/api/game/create", gameValidationMiddleware, async (req: any, res: any) => {
-      //validate req.body data 
       try {
         const newGame = new Game({
           players: req.body.game.players,
@@ -88,32 +87,28 @@ class App {
           antiAmount: req.body.game.antiAmount
         });
 
-        console.log(newGame);
+        //randomized deck, set other parameters here
         
         return await gameController
-        .create(newGame)
-        .then((game) => {
-          console.log("Success: Created new game..." + game);
-          res.json({
-            isGameCreated: true,
-            game: game
+          .create(newGame)
+          .then((game) => {
+            console.log("Success: Created new game...", game);
+            res.json({
+              isGameCreated: true,
+              game: game
+            })
           })
-        })
-        .catch((error) => {
-          console.log("Error: Failed to create game..." + error);
-          res.json({
-            isGameCreated: false
-          })
-        });
+          .catch((error) => {
+            console.log("Error: Failed to create game...", error);
+            res.json({
+              isGameCreated: false
+            })
+          });
+        
       } catch (error) {
         res.status(403);
 				return res.json(errorFunction(true, "Error Creating User"));
       }
-
-
-      
-
-
     });
 
     app.delete("/api/player/deck/discard", async (req: any, res: any) => {
