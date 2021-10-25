@@ -61,13 +61,17 @@ class CreateGameModal extends Component<Props> {
     playersArray.push(p1);
     playersArray.push(p2);
 
+
+    //use Partial here, only need requiredPointsPerPlayer, antiAmount, players
     const newGame: Game = {
       id: "0",
       pot: 0,
       roundCount: 1,
       status: "starting",
       players: playersArray,
-      deck: []
+      deck: [],
+      requiredPointsPerPlayer: 500,
+      antiAmount: 5000
     }
   
     axios

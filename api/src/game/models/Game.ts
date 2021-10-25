@@ -8,8 +8,10 @@ export const GameSchema = new Schema({
   pot: Number,
   roundCount: Number,
   status: String,
-  players: [{ players: [PlayerSchema] }],
-  deck: [{ cards: [CardSchema] }]
+  players: [PlayerSchema],
+  deck: [CardSchema],
+  requiredPointsPerPlayer: Number,
+  antiAmount: Number
 });
 
 export const Game = mongoose.model("Game", GameSchema);

@@ -3,9 +3,11 @@ import Player from './Player';
 
 export default interface Game {
   id: String;
-  pot: number;
-  roundCount: number;
-  status: string;
+  pot: Number;
+  roundCount: Number;
+  status: String;
   players: Player[];
   deck: Card[];
+  requiredPointsPerPlayer: Number;
+  antiAmount: Number;
 }

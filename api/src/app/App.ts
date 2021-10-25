@@ -78,11 +78,13 @@ class App {
       res.send('swe681-game.net/api')
     });
 
-    app.post("/api/game/create",  async (req: any, res: any) => {
-      console.log(req.body);
-
+    app.post("/api/game/create", async (req: any, res: any) => {
       //validate req.body data 
-      const newGame = new Game(req.body);
+      const newGame = new Game({
+        players: req.body.game.players,
+        requiredPointsPerPlayer: req.body.game.requiredPointsPerPlayer,
+        antiAmount: req.body.game.antiAmount
+      });
 
       console.log(newGame)
 
