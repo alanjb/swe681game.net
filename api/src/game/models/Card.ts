@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const CardSchema = new mongoose.Schema({
+export const CardSchema = new Schema({
   face: {
     type: String,
   },
@@ -9,6 +9,4 @@ const CardSchema = new mongoose.Schema({
   }
 });
 
-const Card = mongoose.model("Card", CardSchema);
-
-export default Card;
+export const Card = mongoose.model("Card", CardSchema);

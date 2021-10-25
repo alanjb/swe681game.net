@@ -1,13 +1,15 @@
-const mongoose = require('mongoose');
+import mongoose, { Schema } from 'mongoose';
+import { PlayerSchema } from "./Player";
+import { CardSchema } from "./Card";
 
 //add validation here 
-const GameSchema = new mongoose.Schema({
-  players: {
-    type: Array,
-    default: [],
-  },
+export const GameSchema = new Schema({
+  id: String,
+  pot: Number,
+  roundCount: Number,
+  status: String,
+  players: [{ players: [PlayerSchema] }],
+  deck: [{ cards: [CardSchema] }]
 });
 
-const Game = mongoose.model("Game", GameSchema);
-
-export default Game;
+export const Game = mongoose.model("Game", GameSchema);

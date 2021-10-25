@@ -2,8 +2,8 @@ import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
 import GameController from '../game/GameController';
-import GameModel from "../game/models/Game";
-import CardModel from "../game/models/Card";
+import {Game} from "../game/models/Game";
+import { Card } from "../game/models/Card";
 import { CARD_REGEX } from './utils'
 
 // Creates and configures an Node web server. Prevents sub-typing of this class.
@@ -79,28 +79,28 @@ class App {
     });
 
     app.post("/api/game/create",  async (req: any, res: any) => {
-      console.log("Creating game...");
+      console.log(req.body);
 
       //validate req.body data 
-      const newGame = new GameModel(req.body);
+      const newGame = new Game(req.body);
 
       console.log(newGame)
 
-      return gameController
-        .create(newGame)
-        .then((game) => {
-          console.log("Success: Created new game..." + game);
-          res.json({
-            isGameCreated: true,
-            game: game
-          })
-        })
-        .catch((error) => {
-          console.log("Error: Failed to create game..." + error);
-          res.json({
-            isGameCreated: false
-          })
-        });
+      // return gameController
+      //   .create(newGame)
+      //   .then((game) => {
+      //     console.log("Success: Created new game..." + game);
+      //     res.json({
+      //       isGameCreated: true,
+      //       game: game
+      //     })
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error: Failed to create game..." + error);
+      //     res.json({
+      //       isGameCreated: false
+      //     })
+      //   });
     });
 
     app.delete("/api/player/deck/discard", async (req: any, res: any) => {
@@ -112,7 +112,7 @@ class App {
 
           if (cardType.match(CARD_REGEX)) {
         
-            const cardToDiscard = new CardModel({id: card.id, face: card.face, suit: card.suit});
+            const cardToDiscard = new Card({id: card.id, face: card.face, suit: card.suit});
 
             gameController
               .discard(cardToDiscard)

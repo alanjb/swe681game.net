@@ -1,5 +1,3 @@
-import GameModel from "./models/Game";
-
 class GameController {
   public create(game) {
     return game

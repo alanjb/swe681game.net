@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Component } from 'react';
 import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import Game from '../models/Game';
+import Player from '../models/Player';
 
 class CreateGameModal extends Component<Props> {
   render() {
@@ -37,11 +38,40 @@ class CreateGameModal extends Component<Props> {
 
   create = () => {
     const { created } = this.props;
-    const playersArray = ['john@gmail.com', 'jim@gmail.com'];
+    const playersArray: Player[] = [];
+
+    //Below is for testing
+
+    const p1: Player = {
+      id: "000",
+      folded: false,
+      hand: [],
+      isDealer: false,
+      points: 0
+    }
+
+    const p2: Player = {
+      id: "111",
+      folded: false,
+      hand: [],
+      isDealer: false,
+      points: 0
+    }
+
+    playersArray.push(p1);
+    playersArray.push(p2);
+
+    const newGame: Game = {
+      id: "0",
+      pot: 0,
+      roundCount: 1,
+      status: "starting",
+      players: playersArray,
+      deck: []
+    }
   
-    //get other settings - use a create new game modal 
     axios
-      .post(`http://localhost:8000/api/game/create`, {playersArray: playersArray})
+      .post(`http://localhost:8000/api/game/create`, {game: newGame})
       .then(res => {
         if(res.data){
           const { game } = res.data;

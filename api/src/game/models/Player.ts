@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
 
-const PlayerSchema = new mongoose.Schema({
-  currentHand: {
-    type: [],
-    default: [],
-  }
+export const PlayerSchema = new mongoose.Schema({
+  id: String,
+  folded: Boolean,
+  isDealer: Boolean,
+  points: Number,
+  hand: [],
 });
 
-const Player = mongoose.model("Player", PlayerSchema);
-
-export default Player;
+export const Player = mongoose.model("Player", PlayerSchema);
